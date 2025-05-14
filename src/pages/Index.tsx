@@ -1,6 +1,5 @@
-
 import { useRef, useEffect } from 'react';
-import Navigation from '@/components/Navigation';
+import CustomNavigation from '@/components/CustomNavigation';
 import ParticleScene from '@/components/ParticleScene';
 import HeroObject3D from '@/components/HeroObject3D';
 import ProjectCard from '@/components/ProjectCard';
@@ -50,7 +49,7 @@ const Index = () => {
   return (
     <div className="min-h-screen relative">
       <ParticleScene />
-      <Navigation />
+      <CustomNavigation />
 
       {/* Hero Section */}
       <section id="home" className="min-h-screen flex items-center px-6 py-20 relative">
