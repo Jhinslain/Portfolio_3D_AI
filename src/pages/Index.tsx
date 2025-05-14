@@ -2,6 +2,7 @@
 import { useRef, useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import ParticleScene from '@/components/ParticleScene';
+import HeroObject3D from '@/components/HeroObject3D';
 import ProjectCard from '@/components/ProjectCard';
 import SkillCard from '@/components/SkillCard';
 import ContactForm from '@/components/ContactForm';
@@ -52,7 +53,8 @@ const Index = () => {
       <Navigation />
 
       {/* Hero Section */}
-      <section id="home" className="min-h-screen flex items-center px-6 py-20">
+      <section id="home" className="min-h-screen flex items-center px-6 py-20 relative">
+        <HeroObject3D />
         <div 
           ref={sectionRefs.intro}
           className="max-w-4xl mx-auto opacity-0"
