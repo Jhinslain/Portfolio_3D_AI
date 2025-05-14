@@ -83,6 +83,7 @@ const ParticleField = () => {
     pointsRef.current.rotation.x += delta * 0.02;
   });
   
+  // Utiliser la syntaxe correcte pour React Three Fiber
   return (
     <points ref={pointsRef}>
       <pointsMaterial
