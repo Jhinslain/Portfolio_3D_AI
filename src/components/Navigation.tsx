@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { cn } from "@/lib/utils";
+import { Link } from "react-router-dom";
 
 const Navigation = () => {
   const [activeSection, setActiveSection] = useState('home');
@@ -53,26 +54,34 @@ const Navigation = () => {
         <div className="text-xl font-display font-bold text-glow">
           Portfolio
         </div>
-        <ul className="hidden md:flex space-x-8">
-          {['home', 'projects', 'skills', 'contact'].map((section) => (
-            <li key={section}>
-              <button
-                onClick={() => scrollToSection(section)}
-                className={cn(
-                  "text-sm font-medium relative px-1 py-2 transition-colors",
-                  activeSection === section 
-                    ? "text-primary" 
-                    : "text-foreground/70 hover:text-foreground"
-                )}
-              >
-                {section.charAt(0).toUpperCase() + section.slice(1)}
-                {activeSection === section && (
-                  <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary rounded-full" />
-                )}
-              </button>
-            </li>
-          ))}
-        </ul>
+        <div className="flex items-center">
+          <ul className="hidden md:flex space-x-8 mr-6">
+            {['home', 'projects', 'skills', 'contact'].map((section) => (
+              <li key={section}>
+                <button
+                  onClick={() => scrollToSection(section)}
+                  className={cn(
+                    "text-sm font-medium relative px-1 py-2 transition-colors",
+                    activeSection === section 
+                      ? "text-primary" 
+                      : "text-foreground/70 hover:text-foreground"
+                  )}
+                >
+                  {section.charAt(0).toUpperCase() + section.slice(1)}
+                  {activeSection === section && (
+                    <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary rounded-full" />
+                  )}
+                </button>
+              </li>
+            ))}
+          </ul>
+          <Link 
+            to="/unity-game" 
+            className="text-sm font-medium px-3 py-2 bg-primary/20 text-primary rounded-md hover:bg-primary/30 transition-colors"
+          >
+            Unity Game
+          </Link>
+        </div>
         <div className="md:hidden">
           {/* Mobile menu (simplified for this version) */}
           <button className="text-foreground">
