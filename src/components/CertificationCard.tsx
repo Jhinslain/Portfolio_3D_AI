@@ -11,11 +11,13 @@ export interface CertificationProps {
   skills: string[];
   image?: string;
   url?: string;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
-const CertificationCard = ({ title, issuer, date, skills, image, url }: CertificationProps) => {
+const CertificationCard = ({ title, issuer, date, skills, image, url, className, style }: CertificationProps) => {
   return (
-    <Card className="h-full transition-all duration-300 hover:shadow-lg hover:border-primary/20 overflow-hidden">
+    <Card className={`h-full transition-all duration-300 hover:shadow-lg hover:border-primary/20 overflow-hidden ${className || ''}`} style={style}>
       <div className="relative">
         {image && (
           <div className="relative h-40 w-full overflow-hidden">
