@@ -5,6 +5,7 @@ import HeroObject3D from '@/components/HeroObject3D';
 import ProjectCard from '@/components/ProjectCard';
 import SkillCard from '@/components/SkillCard';
 import ContactForm from '@/components/ContactForm';
+import CertificationsSection from '@/components/CertificationsSection';
 import { Button } from '@/components/ui/button';
 
 const Index = () => {
@@ -13,6 +14,7 @@ const Index = () => {
     intro: useRef<HTMLDivElement>(null),
     projects: useRef<HTMLDivElement>(null),
     skills: useRef<HTMLDivElement>(null),
+    certifications: useRef<HTMLDivElement>(null),
     contact: useRef<HTMLDivElement>(null)
   };
 
@@ -119,6 +121,16 @@ const Index = () => {
               className="animate-fade-in opacity-100 delay-300"
             />
           </div>
+        </div>
+      </section>
+
+      {/* Certifications Section */}
+      <section id="certifications" className="py-20 px-6 bg-gradient-to-b from-background/50 to-background">
+        <div 
+          ref={sectionRefs.certifications}
+          className="max-w-6xl mx-auto opacity-0"
+        >
+          <CertificationsSection />
         </div>
       </section>
 

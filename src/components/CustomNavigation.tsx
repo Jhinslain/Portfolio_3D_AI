@@ -22,6 +22,17 @@ const CustomNavigation = () => {
     { href: '/ai-demo', label: 'Démo IA' }
   ];
 
+  const handleScrollTo = (sectionId: string) => {
+    if (location.pathname !== '/') {
+      return;
+    }
+    
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -69,6 +80,15 @@ const CustomNavigation = () => {
                     {link.label}
                   </Link>
                 ))}
+                <button
+                  onClick={() => {
+                    handleScrollTo('certifications');
+                    setIsMenuOpen(false);
+                  }}
+                  className="px-4 py-2 rounded-md transition-colors hover:bg-muted text-left"
+                >
+                  Certifications
+                </button>
               </nav>
             </CollapsibleContent>
           </Collapsible>
@@ -86,6 +106,12 @@ const CustomNavigation = () => {
                 {link.label}
               </Link>
             ))}
+            <button
+              onClick={() => handleScrollTo('certifications')}
+              className="px-4 py-2 rounded-md transition-colors hover:bg-muted"
+            >
+              Certifications
+            </button>
           </nav>
         )}
       </div>
