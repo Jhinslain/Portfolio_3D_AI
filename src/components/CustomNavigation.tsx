@@ -82,6 +82,15 @@ const CustomNavigation = () => {
                 ))}
                 <button
                   onClick={() => {
+                    handleScrollTo('education');
+                    setIsMenuOpen(false);
+                  }}
+                  className="px-4 py-2 rounded-md transition-colors hover:bg-muted text-left"
+                >
+                  Parcours
+                </button>
+                <button
+                  onClick={() => {
                     handleScrollTo('certifications');
                     setIsMenuOpen(false);
                   }}
@@ -106,6 +115,12 @@ const CustomNavigation = () => {
                 {link.label}
               </Link>
             ))}
+            <button
+              onClick={() => handleScrollTo('education')}
+              className="px-4 py-2 rounded-md transition-colors hover:bg-muted"
+            >
+              Parcours
+            </button>
             <button
               onClick={() => handleScrollTo('certifications')}
               className="px-4 py-2 rounded-md transition-colors hover:bg-muted"

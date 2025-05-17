@@ -1,3 +1,4 @@
+
 import { useRef, useEffect } from 'react';
 import CustomNavigation from '@/components/CustomNavigation';
 import ParticleScene from '@/components/ParticleScene';
@@ -6,6 +7,7 @@ import ProjectCard from '@/components/ProjectCard';
 import SkillCard from '@/components/SkillCard';
 import ContactForm from '@/components/ContactForm';
 import CertificationsSection from '@/components/CertificationsSection';
+import EducationTimeline from '@/components/EducationTimeline';
 import { Button } from '@/components/ui/button';
 
 const Index = () => {
@@ -15,6 +17,7 @@ const Index = () => {
     projects: useRef<HTMLDivElement>(null),
     skills: useRef<HTMLDivElement>(null),
     certifications: useRef<HTMLDivElement>(null),
+    education: useRef<HTMLDivElement>(null),
     contact: useRef<HTMLDivElement>(null)
   };
 
@@ -76,6 +79,25 @@ const Index = () => {
               Contact Me
             </Button>
           </div>
+        </div>
+      </section>
+
+      {/* Education Timeline Section */}
+      <section id="education" className="py-20 px-6 bg-gradient-to-b from-background/30 to-background/60">
+        <div 
+          ref={sectionRefs.education}
+          className="max-w-6xl mx-auto opacity-0"
+        >
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
+              Parcours Académique
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Mon parcours éducatif dans le domaine de l'informatique et des technologies immersives.
+            </p>
+          </div>
+
+          <EducationTimeline />
         </div>
       </section>
 
