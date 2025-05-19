@@ -5,6 +5,10 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
+  assetsInclude: ['**/*.bin', '**/*.json', '**/*.wasm'], // autoriser le chargement des modèles
+  optimizeDeps: {
+    exclude: ['@xenova/transformers'], // à cause de l'import dynamique
+  },
   server: {
     host: "::",
     port: 8080,
