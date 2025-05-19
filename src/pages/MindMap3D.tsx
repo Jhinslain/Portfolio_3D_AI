@@ -1,11 +1,23 @@
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import CustomNavigation from '@/components/CustomNavigation';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
+import { toast } from '@/components/ui/use-toast';
+
+// Node type definition
+interface Node {
+  mesh: THREE.Mesh;
+  name: string;
+  description: string;
+  linkedNodes: string[];
+}
 
 const MindMap3D = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [selectedNode, setSelectedNode] = useState<Node | null>(null);
+  const [nodeMap, setNodeMap] = useState<Map<string, Node>>(new Map());
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -37,8 +49,65 @@ const MindMap3D = () => {
     directionalLight.position.set(1, 1, 1);
     scene.add(directionalLight);
 
-    // Create sample nodes for the mind map
-    const createNode = (position: THREE.Vector3, color: number) => {
+    // Sample wiki nodes data
+    const wikiNodes = [
+      { 
+        name: "Intelligence Artificielle", 
+        description: "Technologie visant à créer des machines capables de simuler l'intelligence humaine",
+        links: ["Machine Learning", "Deep Learning", "NLP"]
+      },
+      { 
+        name: "Machine Learning", 
+        description: "Branche de l'IA qui permet aux systèmes d'apprendre à partir de données",
+        links: ["Intelligence Artificielle", "Deep Learning", "Algorithmes"]
+      },
+      { 
+        name: "Deep Learning", 
+        description: "Sous-catégorie du ML utilisant des réseaux de neurones profonds",
+        links: ["Intelligence Artificielle", "Machine Learning", "Réseaux de neurones"]
+      },
+      { 
+        name: "NLP", 
+        description: "Traitement automatique du langage naturel",
+        links: ["Intelligence Artificielle", "Linguistique", "Text Mining"]
+      },
+      { 
+        name: "Algorithmes", 
+        description: "Suite d'instructions pour résoudre un problème particulier",
+        links: ["Machine Learning", "Informatique", "Structure de données"]
+      },
+      { 
+        name: "Réseaux de neurones", 
+        description: "Modèles inspirés du cerveau humain pour l'apprentissage automatique",
+        links: ["Deep Learning", "Intelligence Artificielle"]
+      },
+      { 
+        name: "Linguistique", 
+        description: "Étude scientifique du langage humain",
+        links: ["NLP", "Communication"]
+      },
+      { 
+        name: "Text Mining", 
+        description: "Extraction d'information à partir de textes",
+        links: ["NLP", "Data Mining"]
+      },
+      { 
+        name: "Informatique", 
+        description: "Science du traitement automatique de l'information",
+        links: ["Algorithmes", "Programmation"]
+      },
+      { 
+        name: "Structure de données", 
+        description: "Manières d'organiser les données pour un usage efficace",
+        links: ["Algorithmes", "Informatique"]
+      }
+    ];
+
+    // Store nodes in a map for easy access
+    const nodes = new Map<string, Node>();
+    
+    // Create nodes
+    const createNode = (name: string, position: THREE.Vector3, color: number) => {
       const geometry = new THREE.SphereGeometry(0.2, 32, 32);
       const material = new THREE.MeshStandardMaterial({ 
         color: color,
@@ -49,6 +118,7 @@ const MindMap3D = () => {
       });
       const sphere = new THREE.Mesh(geometry, material);
       sphere.position.copy(position);
+      sphere.userData.name = name;
       return sphere;
     };
 
@@ -64,55 +134,107 @@ const MindMap3D = () => {
       return new THREE.Line(geometry, material);
     };
 
-    // Create sample data for visualization
-    const nodes: THREE.Mesh[] = [];
-    const connections: THREE.Line[] = [];
-    const nodeCount = 30;
-    const connectionCount = 50;
-    
-    // Create random nodes
-    for (let i = 0; i < nodeCount; i++) {
+    // Position nodes in 3D space - use a spherical distribution
+    wikiNodes.forEach((wikiNode, index) => {
+      // Create a spherical distribution
+      const phi = Math.acos(-1 + (2 * index) / wikiNodes.length);
+      const theta = Math.sqrt(wikiNodes.length * Math.PI) * phi;
+      const radius = 4;
+      
       const position = new THREE.Vector3(
-        (Math.random() - 0.5) * 10,
-        (Math.random() - 0.5) * 10,
-        (Math.random() - 0.5) * 10
+        radius * Math.cos(theta) * Math.sin(phi),
+        radius * Math.sin(theta) * Math.sin(phi),
+        radius * Math.cos(phi)
       );
       
-      // Create color based on position (just for visual variety)
+      // Create color based on position
       const color = new THREE.Color(
         0.5 + 0.5 * Math.sin(position.x),
         0.5 + 0.5 * Math.sin(position.y),
         0.5 + 0.5 * Math.sin(position.z)
       );
       
-      const node = createNode(position, color.getHex());
-      scene.add(node);
-      nodes.push(node);
-    }
-    
-    // Create random connections
-    for (let i = 0; i < connectionCount; i++) {
-      const startIndex = Math.floor(Math.random() * nodes.length);
-      const endIndex = Math.floor(Math.random() * nodes.length);
+      const nodeMesh = createNode(wikiNode.name, position, color.getHex());
+      scene.add(nodeMesh);
       
-      if (startIndex !== endIndex) {
-        const start = nodes[startIndex].position;
-        const end = nodes[endIndex].position;
-        
-        // Color that blends the two node colors
-        const startColor = (nodes[startIndex].material as THREE.MeshStandardMaterial).color;
-        const endColor = (nodes[endIndex].material as THREE.MeshStandardMaterial).color;
-        const blendedColor = new THREE.Color(
-          (startColor.r + endColor.r) / 2,
-          (startColor.g + endColor.g) / 2,
-          (startColor.b + endColor.b) / 2
-        );
-        
-        const connection = createConnection(start, end, blendedColor.getHex());
-        scene.add(connection);
-        connections.push(connection);
+      nodes.set(wikiNode.name, {
+        mesh: nodeMesh,
+        name: wikiNode.name,
+        description: wikiNode.description,
+        linkedNodes: wikiNode.links
+      });
+    });
+
+    // Create connections based on links
+    wikiNodes.forEach(wikiNode => {
+      const sourceNode = nodes.get(wikiNode.name);
+      if (sourceNode) {
+        wikiNode.links.forEach(targetName => {
+          const targetNode = nodes.get(targetName);
+          if (targetNode) {
+            const startPos = sourceNode.mesh.position;
+            const endPos = targetNode.mesh.position;
+            
+            // Blend colors of the two nodes
+            const sourceColor = (sourceNode.mesh.material as THREE.MeshStandardMaterial).color;
+            const targetColor = (targetNode.mesh.material as THREE.MeshStandardMaterial).color;
+            const blendedColor = new THREE.Color(
+              (sourceColor.r + targetColor.r) / 2,
+              (sourceColor.g + targetColor.g) / 2,
+              (sourceColor.b + targetColor.b) / 2
+            );
+            
+            const connection = createConnection(startPos, endPos, blendedColor.getHex());
+            scene.add(connection);
+          }
+        });
       }
-    }
+    });
+
+    // Set up raycaster for click detection
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+
+    // Mouse click handler
+    const handleClick = (event: MouseEvent) => {
+      // Calculate mouse position in normalized device coordinates
+      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+      
+      // Update the ray with the camera and mouse position
+      raycaster.setFromCamera(mouse, camera);
+      
+      // Find intersections with nodes
+      const nodeObjects = Array.from(nodes.values()).map(node => node.mesh);
+      const intersects = raycaster.intersectObjects(nodeObjects);
+      
+      if (intersects.length > 0) {
+        const clickedMesh = intersects[0].object as THREE.Mesh;
+        const nodeName = clickedMesh.userData.name;
+        const clickedNode = nodes.get(nodeName);
+        
+        if (clickedNode) {
+          setSelectedNode(clickedNode);
+          
+          // Highlight the clicked node
+          (clickedMesh.material as THREE.MeshStandardMaterial).emissiveIntensity = 0.8;
+          
+          // Show toast with node info
+          toast({
+            title: clickedNode.name,
+            description: `${clickedNode.description} - Liens: ${clickedNode.linkedNodes.join(", ")}`,
+            duration: 5000,
+          });
+          
+          // Reset the highlight after a delay
+          setTimeout(() => {
+            (clickedMesh.material as THREE.MeshStandardMaterial).emissiveIntensity = 0.3;
+          }, 2000);
+        }
+      }
+    };
+    
+    window.addEventListener('click', handleClick);
 
     // Set up OrbitControls
     const controls = new OrbitControls(camera, renderer.domElement);
@@ -129,6 +251,9 @@ const MindMap3D = () => {
     };
     
     window.addEventListener('resize', handleResize);
+
+    // Update node map for use in React components
+    setNodeMap(nodes);
 
     // Animation loop
     const animate = () => {
@@ -149,6 +274,7 @@ const MindMap3D = () => {
     // Clean up
     return () => {
       window.removeEventListener('resize', handleResize);
+      window.removeEventListener('click', handleClick);
       
       if (containerRef.current && containerRef.current.contains(renderer.domElement)) {
         containerRef.current.removeChild(renderer.domElement);
@@ -176,8 +302,32 @@ const MindMap3D = () => {
           <p>• Cliquez et faites glisser pour faire pivoter la vue</p>
           <p>• Utilisez la molette pour zoomer/dézoomer</p>
           <p>• Clic droit + glisser pour déplacer la vue</p>
+          <p>• <span className="text-primary">Cliquez sur une sphère pour afficher ses informations</span></p>
         </div>
       </div>
+      
+      {selectedNode && (
+        <div className="absolute bottom-6 right-6 max-w-sm z-10">
+          <div className="bg-background/80 backdrop-blur-sm p-4 rounded-lg shadow-lg">
+            <h3 className="font-bold text-lg">{selectedNode.name}</h3>
+            <p className="text-sm text-muted-foreground mt-1">{selectedNode.description}</p>
+            
+            <div className="mt-3">
+              <h4 className="text-xs font-semibold mb-1">Articles liés:</h4>
+              <div className="flex flex-wrap gap-2">
+                {selectedNode.linkedNodes.map(linkName => (
+                  <span 
+                    key={linkName}
+                    className="text-xs bg-primary/20 text-primary px-2 py-1 rounded-full"
+                  >
+                    {linkName}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
