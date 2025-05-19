@@ -8,7 +8,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@/components/ui/collapsible';
-import { Brain } from 'lucide-react';
+import { Brain, Network } from 'lucide-react';
 
 const CustomNavigation = () => {
   const isMobile = useIsMobile();
@@ -19,6 +19,7 @@ const CustomNavigation = () => {
   const links = [
     { href: '/', label: 'Accueil' },
     { href: '/unity-game', label: 'Unity Game' },
+    { href: '/mind-map', label: 'Mindmap 3D' },
     { href: '/ai-demo', label: 'Démo IA' }
   ];
 
