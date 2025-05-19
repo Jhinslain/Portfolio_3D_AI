@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -173,7 +172,7 @@ const ProjectDetail = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />
         <div className="absolute bottom-0 left-0 w-full p-6 md:p-10">
           <div className="max-w-6xl mx-auto">
-            <Link to="/" className="inline-flex items-center text-white/80 hover:text-white transition-colors mb-4">
+            <Link to="/#projects" className="inline-flex items-center text-white/80 hover:text-white transition-colors mb-4">
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to Projects
             </Link>
