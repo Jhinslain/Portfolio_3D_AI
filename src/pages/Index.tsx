@@ -1,4 +1,3 @@
-
 import { useRef, useEffect } from 'react';
 import CustomNavigation from '@/components/CustomNavigation';
 import ParticleScene from '@/components/ParticleScene';
@@ -119,27 +118,27 @@ const Index = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <ProjectCard
+              id="neural-environment"
               title="Neural Environment Simulator"
               description="An AI-powered 3D environment that adapts and evolves based on user interaction patterns."
               image="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=1974&auto=format&fit=crop"
               tech={["Three.js", "TensorFlow", "WebGL"]}
-              link="#"
               className="animate-fade-in opacity-100 delay-100"
             />
             <ProjectCard
+              id="immersive-data"
               title="Immersive Data Visualization"
               description="Converting complex datasets into intuitive, interactive 3D visualizations for enhanced comprehension."
               image="https://images.unsplash.com/photo-1633412802994-5c058f151b66?q=80&w=1740&auto=format&fit=crop"
               tech={["D3.js", "React Three Fiber", "Python"]}
-              link="#"
               className="animate-fade-in opacity-100 delay-200"
             />
             <ProjectCard
+              id="generative-art"
               title="Generative Art Installation"
               description="A real-time generative art system that creates unique visuals based on environmental inputs."
               image="https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?q=80&w=1935&auto=format&fit=crop"
               tech={["WebGL", "GLSL", "p5.js"]}
-              link="#"
               className="animate-fade-in opacity-100 delay-300"
             />
           </div>

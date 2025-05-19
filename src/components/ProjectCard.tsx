@@ -3,8 +3,10 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
+import { Link } from 'react-router-dom';
 
-interface ProjectCardProps {
+export interface ProjectCardProps {
+  id: string;
   title: string;
   description: string;
   image: string;
@@ -13,7 +15,7 @@ interface ProjectCardProps {
   className?: string;
 }
 
-const ProjectCard = ({ title, description, image, tech, link, className }: ProjectCardProps) => {
+const ProjectCard = ({ id, title, description, image, tech, link, className }: ProjectCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   
   return (
@@ -50,7 +52,7 @@ const ProjectCard = ({ title, description, image, tech, link, className }: Proje
           ))}
         </div>
         
-        {link && (
+        <Link to={`/project/${id}`}>
           <Button variant="outline" size="sm" className="w-full">
             <span>View Project</span>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-2">
@@ -59,7 +61,7 @@ const ProjectCard = ({ title, description, image, tech, link, className }: Proje
               <line x1="10" y1="14" x2="21" y2="3"></line>
             </svg>
           </Button>
-        )}
+        </Link>
       </div>
     </div>
   );
