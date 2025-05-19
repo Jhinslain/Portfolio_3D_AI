@@ -55,7 +55,7 @@ const CustomNavigation = () => {
         <Link to="/" className="font-display text-xl font-semibold flex items-center gap-2">
           <Brain className="h-6 w-6 text-primary" />
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
-            AI Portfolio
+            Ghislain LEVREAU  
           </span>
         </Link>
 
@@ -81,24 +81,6 @@ const CustomNavigation = () => {
                     {link.label}
                   </Link>
                 ))}
-                <button
-                  onClick={() => {
-                    handleScrollTo('education');
-                    setIsMenuOpen(false);
-                  }}
-                  className="px-4 py-2 rounded-md transition-colors hover:bg-muted text-left"
-                >
-                  Parcours
-                </button>
-                <button
-                  onClick={() => {
-                    handleScrollTo('certifications');
-                    setIsMenuOpen(false);
-                  }}
-                  className="px-4 py-2 rounded-md transition-colors hover:bg-muted text-left"
-                >
-                  Certifications
-                </button>
               </nav>
             </CollapsibleContent>
           </Collapsible>
@@ -116,18 +98,6 @@ const CustomNavigation = () => {
                 {link.label}
               </Link>
             ))}
-            <button
-              onClick={() => handleScrollTo('education')}
-              className="px-4 py-2 rounded-md transition-colors hover:bg-muted"
-            >
-              Parcours
-            </button>
-            <button
-              onClick={() => handleScrollTo('certifications')}
-              className="px-4 py-2 rounded-md transition-colors hover:bg-muted"
-            >
-              Certifications
-            </button>
           </nav>
         )}
       </div>

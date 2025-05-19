@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import Navigation from '@/components/Navigation';
+import CustomNavigation from '@/components/CustomNavigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
@@ -56,7 +56,7 @@ const AIDemo = () => {
 
   return (
     <div className="min-h-screen relative bg-gradient-to-b from-background to-background/95">
-      <Navigation />
+      <CustomNavigation />
 
       <main className="container mx-auto px-4 py-20">
         <div className="flex flex-col items-center justify-center">

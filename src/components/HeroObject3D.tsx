@@ -51,7 +51,7 @@ const Scene = () => {
   const isMobile = useIsMobile();
   
   return (
-    <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1/2 h-full opacity-80 pointer-events-none">
+    <div className="absolute right-0 top-1/2 -translate-y-1/2 w-full h-full opacity-30 pointer-events-none">
       <Canvas
         camera={{ position: [0, 0, 4], fov: 50 }}
         dpr={isMobile ? 1 : 2} // Lower resolution on mobile

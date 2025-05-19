@@ -63,8 +63,8 @@ const Index = () => {
           className="max-w-4xl mx-auto opacity-0"
         >
           <h1 className="text-4xl md:text-6xl font-display font-bold mb-4">
-            Crafting <span className="text-glow text-primary">Digital Experiences</span> <br />
-            with AI & 3D Technology
+            Portfolio de <span className="text-glow text-primary">Ghislain LEVREAU</span> <br />
+            avec AI & 3D Technologies
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl">
             Transforming ideas into immersive, interactive realities 
@@ -78,80 +78,6 @@ const Index = () => {
               Contact Me
             </Button>
           </div>
-        </div>
-      </section>
-
-      {/* Education Timeline Section */}
-      <section id="education" className="py-20 px-6 bg-gradient-to-b from-background/30 to-background/60">
-        <div 
-          ref={sectionRefs.education}
-          className="max-w-6xl mx-auto opacity-0"
-        >
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-              Parcours Académique
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Mon parcours éducatif dans le domaine de l'informatique et des technologies immersives.
-            </p>
-          </div>
-
-          <EducationTimeline />
-        </div>
-      </section>
-
-      {/* Projects Section */}
-      <section id="projects" className="py-20 px-6">
-        <div 
-          ref={sectionRefs.projects}
-          className="max-w-6xl mx-auto opacity-0"
-        >
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-              Featured Projects
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Explore my recent work at the cutting edge of AI and 3D technologies, 
-              highlighting innovative solutions and creative applications.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <ProjectCard
-              id="neural-environment"
-              title="Neural Environment Simulator"
-              description="An AI-powered 3D environment that adapts and evolves based on user interaction patterns."
-              image="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=1974&auto=format&fit=crop"
-              tech={["Three.js", "TensorFlow", "WebGL"]}
-              className="animate-fade-in opacity-100 delay-100"
-            />
-            <ProjectCard
-              id="immersive-data"
-              title="Immersive Data Visualization"
-              description="Converting complex datasets into intuitive, interactive 3D visualizations for enhanced comprehension."
-              image="https://images.unsplash.com/photo-1633412802994-5c058f151b66?q=80&w=1740&auto=format&fit=crop"
-              tech={["D3.js", "React Three Fiber", "Python"]}
-              className="animate-fade-in opacity-100 delay-200"
-            />
-            <ProjectCard
-              id="generative-art"
-              title="Generative Art Installation"
-              description="A real-time generative art system that creates unique visuals based on environmental inputs."
-              image="https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?q=80&w=1935&auto=format&fit=crop"
-              tech={["WebGL", "GLSL", "p5.js"]}
-              className="animate-fade-in opacity-100 delay-300"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Certifications Section */}
-      <section id="certifications" className="py-20 px-6 bg-gradient-to-b from-background/50 to-background">
-        <div 
-          ref={sectionRefs.certifications}
-          className="max-w-6xl mx-auto opacity-0"
-        >
-          <CertificationsSection />
         </div>
       </section>
 
@@ -241,6 +167,83 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+
+      {/* Projects Section */}
+      <section id="projects" className="py-20 px-6">
+        <div 
+          ref={sectionRefs.projects}
+          className="max-w-6xl mx-auto opacity-0"
+        >
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
+              Featured Projects
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Explore my recent work at the cutting edge of AI and 3D technologies, 
+              highlighting innovative solutions and creative applications.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <ProjectCard
+              id="neural-environment"
+              title="Neural Environment Simulator"
+              description="An AI-powered 3D environment that adapts and evolves based on user interaction patterns."
+              image="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=1974&auto=format&fit=crop"
+              tech={["Three.js", "TensorFlow", "WebGL"]}
+              className="animate-fade-in opacity-100 delay-100"
+            />
+            <ProjectCard
+              id="immersive-data"
+              title="Immersive Data Visualization"
+              description="Converting complex datasets into intuitive, interactive 3D visualizations for enhanced comprehension."
+              image="https://images.unsplash.com/photo-1633412802994-5c058f151b66?q=80&w=1740&auto=format&fit=crop"
+              tech={["D3.js", "React Three Fiber", "Python"]}
+              className="animate-fade-in opacity-100 delay-200"
+            />
+            <ProjectCard
+              id="generative-art"
+              title="Generative Art Installation"
+              description="A real-time generative art system that creates unique visuals based on environmental inputs."
+              image="https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?q=80&w=1935&auto=format&fit=crop"
+              tech={["WebGL", "GLSL", "p5.js"]}
+              className="animate-fade-in opacity-100 delay-300"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Education Timeline Section */}
+      <section id="education" className="py-20 px-6 bg-gradient-to-b from-background/30 to-background/60">
+        <div 
+          ref={sectionRefs.education}
+          className="max-w-6xl mx-auto opacity-0"
+        >
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
+              Parcours Académique
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Mon parcours éducatif dans le domaine de l'informatique et des technologies immersives.
+            </p>
+          </div>
+
+          <EducationTimeline />
+        </div>
+      </section>
+
+      {/* Certifications Section */}
+      <section id="certifications" className="py-20 px-6 bg-gradient-to-b from-background/50 to-background">
+        <div 
+          ref={sectionRefs.certifications}
+          className="max-w-6xl mx-auto opacity-0"
+        >
+          <CertificationsSection />
+        </div>
+      </section>
+
+      
 
       {/* Contact Section */}
       <section id="contact" className="py-20 px-6">

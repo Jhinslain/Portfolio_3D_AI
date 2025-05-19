@@ -42,6 +42,15 @@ const educationData: EducationEvent[] = [
     location: 'Marseille',
     description: "Spécialisation en mathématiques et sciences de l'ingénieur avec mention Très Bien.",
     type: 'school'
+  },
+  {
+    id: 4,
+    year: '2018',
+    title: "Baccalauréat Scientifique",
+    institution: 'Lycée Jean Perrin',
+    location: 'Marseille',
+    description: "Spécialisation en mathématiques et sciences de l'ingénieur avec mention Très Bien.",
+    type: 'school'
   }
 ];
 
@@ -102,7 +111,7 @@ const EducationTimeline = () => {
   };
 
   return (
-    <ScrollArea className="relative h-full max-h-[650px] pr-4">
+    <ScrollArea className="relative h-full overflow-y-auto pr-4">
       <div 
         className="space-y-24 relative px-4 py-8"
         ref={timelineRef}
