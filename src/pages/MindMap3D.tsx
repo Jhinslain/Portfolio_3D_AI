@@ -4,7 +4,9 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import CustomNavigation from '@/components/CustomNavigation';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
-import { toast } from '@/components/ui/use-toast';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Search } from 'lucide-react';
 
 // Node type definition
 interface Node {
@@ -18,6 +20,9 @@ const MindMap3D = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [selectedNode, setSelectedNode] = useState<Node | null>(null);
   const [nodeMap, setNodeMap] = useState<Map<string, Node>>(new Map());
+  const [searchTerm, setSearchTerm] = useState('');
+  const controlsRef = useRef<OrbitControls | null>(null);
+  const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -34,6 +39,7 @@ const MindMap3D = () => {
       1000
     );
     camera.position.z = 5;
+    cameraRef.current = camera;
 
     // Set up renderer
     const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -219,13 +225,6 @@ const MindMap3D = () => {
           // Highlight the clicked node
           (clickedMesh.material as THREE.MeshStandardMaterial).emissiveIntensity = 0.8;
           
-          // Show toast with node info
-          toast({
-            title: clickedNode.name,
-            description: `${clickedNode.description} - Liens: ${clickedNode.linkedNodes.join(", ")}`,
-            duration: 5000,
-          });
-          
           // Reset the highlight after a delay
           setTimeout(() => {
             (clickedMesh.material as THREE.MeshStandardMaterial).emissiveIntensity = 0.3;
@@ -240,6 +239,7 @@ const MindMap3D = () => {
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
+    controlsRef.current = controls;
 
     // Handle window resize
     const handleResize = () => {
@@ -285,6 +285,55 @@ const MindMap3D = () => {
     };
   }, []);
 
+  // Function to focus camera on a specific node
+  const focusOnNode = (nodeName: string) => {
+    const node = nodeMap.get(nodeName);
+    if (node && cameraRef.current && controlsRef.current) {
+      // Set orbit controls target to node position
+      controlsRef.current.target.copy(node.mesh.position);
+      
+      // Position camera to look at node from a slight distance
+      const offsetPosition = node.mesh.position.clone().add(new THREE.Vector3(0, 0, 1.5));
+      cameraRef.current.position.copy(offsetPosition);
+      
+      // Highlight the found node
+      (node.mesh.material as THREE.MeshStandardMaterial).emissiveIntensity = 0.8;
+      
+      // Update the selected node
+      setSelectedNode(node);
+      
+      // Reset the highlight after a delay
+      setTimeout(() => {
+        (node.mesh.material as THREE.MeshStandardMaterial).emissiveIntensity = 0.3;
+      }, 3000);
+    }
+  };
+
+  // Handle search form submission
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchTerm.trim()) {
+      // Try to find an exact match first
+      const exactMatch = Array.from(nodeMap.keys()).find(
+        key => key.toLowerCase() === searchTerm.toLowerCase()
+      );
+      
+      if (exactMatch) {
+        focusOnNode(exactMatch);
+        return;
+      }
+      
+      // If no exact match, try partial matches
+      const partialMatch = Array.from(nodeMap.keys()).find(
+        key => key.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      
+      if (partialMatch) {
+        focusOnNode(partialMatch);
+      }
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <CustomNavigation />
@@ -298,6 +347,23 @@ const MindMap3D = () => {
         <p className="text-sm text-muted-foreground mb-4">
           Visualisation des liens entre articles Wikipedia
         </p>
+        
+        {/* Search form */}
+        <form onSubmit={handleSearch} className="mb-4">
+          <div className="flex gap-2">
+            <Input
+              type="text"
+              placeholder="Rechercher un nœud..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="flex-1"
+            />
+            <Button type="submit" variant="outline" size="icon">
+              <Search className="h-4 w-4" />
+            </Button>
+          </div>
+        </form>
+        
         <div className="text-xs text-muted-foreground space-y-1">
           <p>• Cliquez et faites glisser pour faire pivoter la vue</p>
           <p>• Utilisez la molette pour zoomer/dézoomer</p>
