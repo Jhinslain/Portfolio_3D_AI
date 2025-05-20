@@ -11,6 +11,8 @@ import { Button } from '@/components/ui/button';
 import { Search } from 'lucide-react';
 import { fetchWikiSubgraph, WikiNodeData } from '@/services/fetchWikiSubgraph';
 import { findShortestPath } from '@/services/findShortestPath';
+import { bidirectionalSearch } from '@/services/bidirectionnalSearch';
+import { Slider } from '@/components/ui/slider';
 
 // Node type definition
 interface Node {
@@ -31,6 +33,7 @@ const MindMap3D = () => {
   const [pathNodes, setPathNodes] = useState<string[]>([]);
   const [currentCrawlNode, setCurrentCrawlNode] = useState<string>('');
   const [crawlProgress, setCrawlProgress] = useState({ current: 0, total: 0 });
+  const [linkDepth, setLinkDepth] = useState(3);
   const controlsRef = useRef<OrbitControls | null>(null);
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
   const sceneRef = useRef<THREE.Scene | null>(null);
@@ -170,7 +173,7 @@ const MindMap3D = () => {
       0.1, 
       1000
     );
-    camera.position.z = 5;
+    camera.position.z = 20;
     cameraRef.current = camera;
 
     // Set up renderer
@@ -409,7 +412,7 @@ const MindMap3D = () => {
 
     setIsLoading(true);
     try {
-      const wikiNodes = await fetchWikiSubgraph(searchTerm, 10, 1);
+      const wikiNodes = await fetchWikiSubgraph(searchTerm, 10, linkDepth);
       
       // Clear existing nodes
       sceneRef.current.children
@@ -506,42 +509,68 @@ const MindMap3D = () => {
     }
   };
 
+  // Fonction pour réinitialiser le plan
+  const resetScene = () => {
+    if (!sceneRef.current) return;
+    
+    console.log('🧹 Réinitialisation de la scène...');
+    // Supprimer tous les objets sauf les lumières
+    sceneRef.current.children
+      .filter(obj => obj.type !== 'AmbientLight' && obj.type !== 'DirectionalLight')
+      .forEach(obj => sceneRef.current?.remove(obj));
+    
+    // Réinitialiser les états
+    nodeMap.clear();
+    setNodeMap(new Map());
+    setPathNodes([]);
+    setCurrentCrawlNode('');
+    setCrawlProgress({ current: 0, total: 0 });
+  };
+
   // Gestionnaire de recherche de chemin
   const handlePathSearch = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!startNode || !endNode) return;
 
     setIsLoading(true);
-    setCurrentCrawlNode('');
-    setCrawlProgress({ current: 0, total: 0 });
-    console.log('🔍 Début de la recherche de chemin entre:', startNode, 'et', endNode);
     
     try {
-      // Réinitialiser la scène
-      if (sceneRef.current) {
-        console.log('🧹 Réinitialisation de la scène...');
-        sceneRef.current.children
-          .filter(obj => obj.type !== 'AmbientLight' && obj.type !== 'DirectionalLight')
-          .forEach(obj => sceneRef.current?.remove(obj));
-      }
-      nodeMap.clear();
-      setNodeMap(new Map());
+      // Réinitialiser la scène avant de commencer
+      resetScene();
 
       // Fonction pour créer et afficher un nœud
-      const createAndDisplayNode = async (nodeName: string, isPathNode: boolean = false) => {
+      const createAndDisplayNode = async (nodeName: string, isPathNode: boolean = false, side?: 'start' | 'end') => {
         if (!nodeMap.has(nodeName)) {
-          const position = generateCloudPosition(nodeMap.size, 10, 4, 12);
-          const color = isPathNode ? 0x00FFFF : 0xFFFFFF * Math.random();
+          // Calculer une position plus structurée pour les nœuds du chemin
+          const position = isPathNode 
+            ? new THREE.Vector3(
+                (nodeMap.size - 1) * 2, // Espacement horizontal
+                0, // Même hauteur
+                -nodeMap.size * 0.5 // Léger décalage en profondeur
+              )
+            : generateCloudPosition(nodeMap.size, 10, 4, 12);
+
+          // Définir la couleur en fonction du type de nœud
+          let color;
+          if (nodeName === startNode) {
+            color = 0x0066FF; // Bleu pour le nœud de départ
+          } else if (nodeName === endNode) {
+            color = 0xFF0000; // Rouge pour le nœud d'arrivée
+          } else if (isPathNode) {
+            color = 0x00FFFF; // Cyan pour les nœuds du chemin final
+          } else {
+            color = 0xFFFFFF; // Blanc pour les autres nœuds
+          }
           
           const nodeMesh = createNode(
             nodeName, 
             position, 
             color, 
-            false
+            nodeName === startNode || nodeName === endNode
           );
           sceneRef.current?.add(nodeMesh);
           
-          const wikiNodes = await fetchWikiSubgraph(nodeName, 5, 1);
+          const wikiNodes = await fetchWikiSubgraph(nodeName, linkDepth, 1);
           
           nodeMap.set(nodeName, {
             mesh: nodeMesh,
@@ -565,11 +594,11 @@ const MindMap3D = () => {
               geometry.setPositions(pointsArray.flat());
 
               const material = new LineMaterial({
-                color: 0x666666,
-                linewidth: 0.002,
+                color: isPathNode ? 0x00FFFF : 0x666666,
+                linewidth: isPathNode ? 0.005 : 0.002,
                 dashed: false,
                 transparent: true,
-                opacity: 0.3,
+                opacity: isPathNode ? 1 : 0.3,
               });
               material.resolution.set(window.innerWidth, window.innerHeight);
 
@@ -588,21 +617,35 @@ const MindMap3D = () => {
       // Rechercher le chemin via l'API Wikipedia
       console.log('🔄 Recherche du chemin via l\'API Wikipedia...');
       setCurrentCrawlNode('Recherche du chemin...');
-      const path = await findShortestPath(
-        startNode, 
+      const path = await bidirectionalSearch(
+        startNode,
         endNode,
         6,
-        10,
-        async (currentNode, depth) => {
-          setCurrentCrawlNode(`Exploration de "${currentNode}" (profondeur: ${depth})`);
-          await createAndDisplayNode(currentNode);
+        async (currentNode, depth, side) => {
+          setCurrentCrawlNode(
+            `Exploration ${side === 'start' ? 'depuis le début' : 'depuis la fin'}: "${currentNode}" (profondeur: ${depth})`
+          );
+          setCrawlProgress({
+            current: depth,
+            total: 6
+          });
+          // Créer un nœud pour chaque mot exploré
+          await createAndDisplayNode(currentNode, false, side);
+        },
+        async (node, isPathNode) => {
+          await createAndDisplayNode(node, isPathNode);
         }
       );
-      
+
       if (path) {
         console.log('✅ Chemin trouvé:', path);
         console.log('📊 Longueur du chemin:', path.length, 'nœuds');
         setPathNodes(path);
+
+        // Créer les nœuds du chemin s'ils n'existent pas déjà
+        for (const nodeName of path) {
+          await createAndDisplayNode(nodeName, true);
+        }
 
         // Mettre en surbrillance le chemin
         setCurrentCrawlNode('Mise en surbrillance du chemin...');
@@ -667,9 +710,15 @@ const MindMap3D = () => {
 
         // Ajouter un effet de brillance aux nœuds du chemin
         (startNode.mesh.material as THREE.MeshStandardMaterial).emissive.set(0x00FFFF);
-        (startNode.mesh.material as THREE.MeshStandardMaterial).emissiveIntensity = 0.5;
+        (startNode.mesh.material as THREE.MeshStandardMaterial).emissiveIntensity = 0.8;
         (endNode.mesh.material as THREE.MeshStandardMaterial).emissive.set(0x00FFFF);
-        (endNode.mesh.material as THREE.MeshStandardMaterial).emissiveIntensity = 0.5;
+        (endNode.mesh.material as THREE.MeshStandardMaterial).emissiveIntensity = 0.8;
+
+        // Mettre à jour la position des nœuds pour un meilleur alignement
+        if (i === 0) {
+          startNode.mesh.position.set(0, 0, 0);
+        }
+        endNode.mesh.position.set((i + 1) * 2, 0, -(i + 1) * 0.5);
       } else {
         console.warn(`⚠️ Nœud manquant pour la connexion: ${path[i]} -> ${path[i + 1]}`);
       }
@@ -690,55 +739,90 @@ const MindMap3D = () => {
         className="absolute inset-0 -z-0"
         style={{ pointerEvents: 'auto' }}
       />
-      <div className="absolute top-24 left-6 bg-background/70 backdrop-blur-sm p-4 rounded-lg shadow-lg z-10">
+      <div className="absolute top-24 left-6 bg-background/70 backdrop-blur-sm p-4 rounded-lg shadow-lg z-10 max-w-[400px]">
         <h1 className="text-xl font-bold mb-2">Graphe de Connaissance 3D</h1>
         <p className="text-sm text-muted-foreground mb-4">
-          Visualisation des liens entre articles Wikipedia
+          Explorez les connexions entre articles Wikipedia de deux façons différentes
         </p>
         
-        {/* Search form */}
-        <form onSubmit={handleSearch} className="mb-4">
-          <div className="flex gap-2">
-            <Input
-              type="text"
-              placeholder="Rechercher un nœud..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="flex-1"
-              disabled={isLoading}
-            />
-            <Button type="submit" variant="outline" size="icon" disabled={isLoading}>
-              {isLoading ? (
-                <div className="h-4 w-4 animate-spin rounded-full border-2 border-primary border-t-transparent" />
-              ) : (
-                <Search className="h-4 w-4" />
-              )}
-            </Button>
-          </div>
-        </form>
+        {/* Experience 1: Single Node Exploration */}
+        <div className="mb-6 p-4 bg-primary/5 rounded-lg">
+          <h2 className="text-lg font-semibold mb-2">1. Exploration d'un sujet</h2>
+          <p className="text-sm text-muted-foreground mb-3">
+            Entrez un sujet pour voir tous ses articles liés. Plus la profondeur est élevée, plus vous découvrirez de connexions.
+          </p>
+          <form onSubmit={handleSearch} className="mb-4">
+            <div className="flex gap-2 mb-3">
+              <Input
+                type="text"
+                placeholder="Ex: Intelligence Artificielle..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="flex-1"
+                disabled={isLoading}
+              />
+              <Button type="submit" variant="outline" size="icon" disabled={isLoading}>
+                {isLoading ? (
+                  <div className="h-4 w-4 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+                ) : (
+                  <Search className="h-4 w-4" />
+                )}
+              </Button>
+            </div>
+            <div className="px-1">
+              <label className="text-sm font-medium mb-2 block">
+                Profondeur des liens: {linkDepth}
+              </label>
+              <Slider
+                value={[linkDepth]}
+                onValueChange={(value) => setLinkDepth(value[0])}
+                min={1}
+                max={10}
+                step={1}
+                className="w-full"
+              />
+            </div>
+          </form>
+        </div>
 
-        {/* Path search form */}
-        <form onSubmit={handlePathSearch} className="mb-4">
-          <div className="flex flex-col gap-2">
-            <Input
-              type="text"
-              placeholder="Article de départ..."
-              value={startNode}
-              onChange={(e) => setStartNode(e.target.value)}
-              className="flex-1"
-            />
-            <Input
-              type="text"
-              placeholder="Article d'arrivée..."
-              value={endNode}
-              onChange={(e) => setEndNode(e.target.value)}
-              className="flex-1"
-            />
-            <Button type="submit" variant="outline" disabled={isLoading}>
-              {isLoading ? 'Recherche en cours...' : 'Trouver chemin'}
-            </Button>
-          </div>
-        </form>
+        {/* Experience 2: Path Finding */}
+        <div className="mb-6 p-4 bg-primary/5 rounded-lg">
+          <h2 className="text-lg font-semibold mb-2">2. Trouver un chemin</h2>
+          <p className="text-sm text-muted-foreground mb-3">
+            Découvrez comment deux sujets sont connectés en trouvant le chemin le plus court entre eux.
+          </p>
+          <form onSubmit={handlePathSearch} className="mb-4">
+            <div className="flex flex-col gap-2">
+              <div className="relative">
+                <Input
+                  type="text"
+                  placeholder="Sujet de départ..."
+                  value={startNode}
+                  onChange={(e) => setStartNode(e.target.value)}
+                  className={`flex-1 ${startNode ? 'border-blue-500 ring-1 ring-blue-500' : ''}`}
+                />
+                {startNode && (
+                  <div className="absolute -top-1 -right-1 w-2 h-2 bg-blue-500 rounded-full" />
+                )}
+              </div>
+              <div className="relative">
+                <Input
+                  type="text"
+                  placeholder="Sujet d'arrivée..."
+                  value={endNode}
+                  onChange={(e) => setEndNode(e.target.value)}
+                  className={`flex-1 ${endNode ? 'border-red-500 ring-1 ring-red-500' : ''}`}
+                />
+                {endNode && (
+                  <div className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full" />
+                )}
+              </div>
+              <Button type="submit" variant="outline" disabled={isLoading}>
+                {isLoading ? 'Recherche en cours...' : 'Trouver le chemin'}
+              </Button>
+            </div>
+          </form>
+        </div>
 
         {/* Crawl status */}
         {isLoading && (

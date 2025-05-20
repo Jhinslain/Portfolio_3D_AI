@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import CertificationCard, { CertificationProps } from './CertificationCard';
 import { Input } from './ui/input';
@@ -7,94 +6,94 @@ import { Button } from './ui/button';
 import { BookOpen, Search } from 'lucide-react';
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from './ui/pagination';
 
+import openClassrooms from '../assets/images/OpenClassrooms.png';
+import udemy from '../assets/images/Udemy.png';
+
+
 // Sample certifications data - this would typically come from an API or CMS
 const certifications: CertificationProps[] = [
   {
-    title: "Machine Learning Specialization",
-    issuer: "Coursera & Stanford University",
-    date: "Aug 2023",
-    skills: ["Python", "TensorFlow", "Machine Learning", "Neural Networks"],
-    image: "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=1974&auto=format&fit=crop"
+    title: "Apprenez à programmer en C++",
+    issuer: "OpenClassrooms",
+    date: "2025",
+    skills: ["C++"],
+    image: openClassrooms,
+    link: "https://openclassrooms.com/fr/courses/1894236-apprenez-a-programmer-en-c"
   },
   {
-    title: "Deep Learning with PyTorch",
-    issuer: "Udacity",
-    date: "May 2023",
-    skills: ["PyTorch", "Deep Learning", "Computer Vision"],
-    image: "https://images.unsplash.com/photo-1633412802994-5c058f151b66?q=80&w=1740&auto=format&fit=crop"
+    title: "Programmez en orienté objet avec C++",
+    issuer: "OpenClassrooms",
+    date: "2025",
+    skills: ["C++"],
+    image: openClassrooms,
+    link: "https://openclassrooms.com/fr/courses/7137751-programmez-en-oriente-objet-avec-c"
   },
   {
-    title: "Three.js and WebGL Mastery",
+    title: "Réalisez la maquette d'une application mobile avec Adobe XD",
+    issuer: "OpenClassrooms",
+    date: "2025",
+    skills: ["Design"],
+    image: openClassrooms,
+    link: "https://openclassrooms.com/fr/courses/3014016-realisez-la-maquette-d-une-application-mobile-avec-adobe-xd"
+  },
+  {
+    title: "UNREAL ENGINE 5 : Guide complet développeur de jeux",
     issuer: "Udemy",
-    date: "Jan 2024",
-    skills: ["Three.js", "WebGL", "3D Graphics", "JavaScript"],
-    image: "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?q=80&w=1935&auto=format&fit=crop"
+    date: "2025",
+    skills: ["UE5", "Design"],
+    image: udemy,
+    link: "https://www.udemy.com/course/developpeur-unreal-engine-5-blueprint-guide-complet-creer-des-jeux/learn/lecture/28499158?start=0#overview"
   },
   {
-    title: "Full-Stack Web Development",
-    issuer: "freeCodeCamp",
-    date: "Nov 2022",
-    skills: ["React", "Node.js", "MongoDB", "Express"],
-    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1470&auto=format&fit=crop"
+    title: "Débutez avec Angular",
+    issuer: "OpenClassrooms",
+    date: "2025",
+    skills: ["Web"],
+    image: openClassrooms,
+    link: "https://openclassrooms.com/fr/courses/7471261-debutez-avec-angular"
   },
   {
-    title: "Artificial Intelligence: Principles and Techniques",
-    issuer: "edX & MIT",
-    date: "Apr 2023",
-    skills: ["AI", "Machine Learning", "Algorithms", "Problem Solving"],
-    image: "https://images.unsplash.com/photo-1677442135813-6ac2a71c2290?q=80&w=1632&auto=format&fit=crop"
+    title: "Complétez vos connaissances sur Angular",
+    issuer: "OpenClassrooms",
+    date: "2025",
+    skills: ["Web"],
+    image: openClassrooms,
+    link: "https://openclassrooms.com/fr/courses/7471271-completez-vos-connaissances-sur-angular"
   },
   {
-    title: "Unity Game Development Fundamentals",
-    issuer: "Unity Learn",
-    date: "Jul 2023",
-    skills: ["Unity", "C#", "Game Design", "3D Modeling"],
-    image: "https://images.unsplash.com/photo-1580234811497-9df7fd2f357e?q=80&w=1467&auto=format&fit=crop"
-  },
-  // Ajout de plus de certifications pour démontrer la pagination
-  {
-    title: "AWS Cloud Practitioner",
-    issuer: "Amazon Web Services",
-    date: "Jun 2023",
-    skills: ["AWS", "Cloud Computing", "DevOps"],
-    image: "https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?q=80&w=1974&auto=format&fit=crop"
+    title: "Passez au Full Stack avec Node.js, Express et MongoDB",
+    issuer: "OpenClassrooms",
+    date: "2025",
+    skills: ["Web", "Data"],
+    image: openClassrooms,
+    link: "https://openclassrooms.com/fr/courses/6390246-passez-au-full-stack-avec-node-js-express-et-mongodb"
   },
   {
-    title: "GraphQL Complete Guide",
-    issuer: "Apollo GraphQL",
-    date: "Mar 2023",
-    skills: ["GraphQL", "API Design", "JavaScript"],
-    image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1470&auto=format&fit=crop"
+    title: "Concevez votre site web avec PHP et MySQL",
+    issuer: "OpenClassrooms",
+    date: "2025",
+    skills: ["Web", "Data"],
+    image: openClassrooms,
+    link: "https://openclassrooms.com/fr/courses/918836-concevez-votre-site-web-avec-php-et-mysql"
   },
   {
-    title: "Blockchain Development",
-    issuer: "Ethereum Foundation",
-    date: "Feb 2023",
-    skills: ["Blockchain", "Solidity", "Smart Contracts", "Web3"],
-    image: "https://images.unsplash.com/photo-1639762681057-408e52192e55?q=80&w=1632&auto=format&fit=crop"
+    title: "Requêtez une base de données avec SQL",
+    issuer: "OpenClassrooms",
+    date: "2025",
+    skills: ["Data"],
+    image: openClassrooms,
+    link: "https://openclassrooms.com/fr/courses/7818671-requetez-une-base-de-donnees-avec-sql"
   },
   {
-    title: "Mobile App Design",
-    issuer: "Figma Academy",
-    date: "Dec 2022",
-    skills: ["UI/UX", "Mobile Design", "Figma", "Prototyping"],
-    image: "https://images.unsplash.com/photo-1556155092-490a1ba16284?q=80&w=1470&auto=format&fit=crop"
-  },
-  {
-    title: "Cybersecurity Fundamentals",
-    issuer: "CompTIA",
-    date: "Oct 2022",
-    skills: ["Security", "Network Security", "Penetration Testing"],
-    image: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?q=80&w=1470&auto=format&fit=crop"
-  },
-  {
-    title: "Docker & Kubernetes",
-    issuer: "Cloud Native Computing Foundation",
-    date: "Sep 2022",
-    skills: ["Docker", "Kubernetes", "DevOps", "Containerization"],
-    image: "https://images.unsplash.com/photo-1605745341112-85968b19335b?q=80&w=1471&auto=format&fit=crop"
+    title: "Réalisez un dashboard avec Tableau",
+    issuer: "OpenClassrooms",
+    date: "2025",
+    skills: ["Data", "Design"],
+    image: openClassrooms,
+    link: "https://openclassrooms.com/fr/courses/8200086-realisez-un-dashboard-avec-tableau"
   }
 ];
+
 
 const CertificationsSection = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -190,10 +189,10 @@ const CertificationsSection = () => {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-            Certifications & Online Learning
+            Certifications & Formation en Ligne
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            A collection of certificates and courses I've completed to continuously develop my skills and stay current with emerging technologies.
+            Une collection de certificats et de cours que j'ai complétés pour développer continuellement mes compétences et rester à jour avec les technologies émergentes.
           </p>
         </div>
         
@@ -202,12 +201,12 @@ const CertificationsSection = () => {
           <div className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input 
-              placeholder="Search certifications..." 
+              placeholder="Rechercher des certifications..." 
               className="pl-10"
               value={searchQuery}
               onChange={(e) => {
                 setSearchQuery(e.target.value);
-                setCurrentPage(1); // Reset to first page when search changes
+                setCurrentPage(1);
               }}
             />
           </div>
@@ -215,7 +214,7 @@ const CertificationsSection = () => {
           <div>
             <h3 className="text-sm font-medium mb-2 flex items-center gap-2">
               <BookOpen className="h-4 w-4" />
-              Filter by skills:
+              Filtrer par compétences :
             </h3>
             <div className="flex flex-wrap gap-2">
               {allSkills.map(skill => (
@@ -234,11 +233,11 @@ const CertificationsSection = () => {
                   size="sm" 
                   onClick={() => {
                     setSelectedSkills([]);
-                    setCurrentPage(1); // Reset to first page when clearing filters
+                    setCurrentPage(1);
                   }}
                   className="text-xs h-6"
                 >
-                  Clear filters
+                  Effacer les filtres
                 </Button>
               )}
             </div>
@@ -247,8 +246,8 @@ const CertificationsSection = () => {
         
         {/* Results count */}
         <div className="mb-4 text-sm text-muted-foreground">
-          Showing {currentItems.length} of {filteredCertifications.length} certifications
-          {(searchQuery || selectedSkills.length > 0) && " (filtered)"}
+          Affichage de {currentItems.length} sur {filteredCertifications.length} certifications
+          {(searchQuery || selectedSkills.length > 0) && " (filtrées)"}
         </div>
         
         {/* Certifications grid */}
@@ -265,7 +264,7 @@ const CertificationsSection = () => {
           </div>
         ) : (
           <div className="text-center py-12">
-            <p className="text-muted-foreground">No certifications match your filters</p>
+            <p className="text-muted-foreground">Aucune certification ne correspond à vos filtres</p>
           </div>
         )}
         

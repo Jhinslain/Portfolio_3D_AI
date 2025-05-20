@@ -64,18 +64,18 @@ const Index = () => {
         >
           <h1 className="text-4xl md:text-6xl font-display font-bold mb-4">
             Portfolio de <span className="text-glow text-primary">Ghislain LEVREAU</span> <br />
-            avec AI & 3D Technologies
+            avec IA & Technologies 3D
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl">
-            Transforming ideas into immersive, interactive realities 
-            at the intersection of artificial intelligence and 3D design.
+            Transformer les idées en réalités immersives et interactives 
+            à l'intersection de l'intelligence artificielle et du design 3D.
           </p>
           <div className="flex flex-wrap gap-4">
             <Button size="lg" className="bg-gradient-to-r from-primary to-accent text-white">
-              View My Projects
+              Voir mes Projets
             </Button>
             <Button size="lg" variant="outline" className="border-white/20 hover:bg-white/5">
-              Contact Me
+              Me Contacter
             </Button>
           </div>
         </div>
@@ -89,18 +89,18 @@ const Index = () => {
         >
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-              Technical Expertise
+              Compétences Techniques
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              A blend of technical skills, creative thinking, and problem-solving 
-              abilities that drive innovative digital experiences.
+              Une combinaison de compétences techniques, de pensée créative et de résolution de problèmes 
+              qui stimulent les expériences numériques innovantes.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <SkillCard
-              title="3D Development"
-              description="Expert in creating immersive 3D experiences using Three.js, WebGL, and other rendering technologies."
+              title="Développement 3D"
+              description="Expert en création d'expériences 3D immersives utilisant Three.js, WebGL et d'autres technologies de rendu."
               icon={
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M12 3c.5 0 1 .2 1.4.6l7 7c.8.8.8 2 0 2.8l-7 7c-.8.8-2 .8-2.8 0l-7-7c-.8-.8-.8-2 0-2.8l7-7c.4-.4.9-.6 1.4-.6z"></path>
@@ -111,8 +111,8 @@ const Index = () => {
               }
             />
             <SkillCard
-              title="AI & Machine Learning"
-              description="Developing intelligent systems using TensorFlow, PyTorch, and implementing computer vision algorithms."
+              title="IA & Machine Learning"
+              description="Développement de systèmes intelligents utilisant TensorFlow, PyTorch et implémentation d'algorithmes de vision par ordinateur."
               icon={
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <rect width="18" height="18" x="3" y="3" rx="2"></rect>
@@ -123,8 +123,8 @@ const Index = () => {
               }
             />
             <SkillCard
-              title="Interactive Design"
-              description="Creating intuitive, responsive interfaces that blur the line between digital and physical experiences."
+              title="Design Interactif"
+              description="Création d'interfaces intuitives et réactives qui brouillent la frontière entre expériences numériques et physiques."
               icon={
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M7 6l9 4-9 4V6z"></path>
@@ -133,8 +133,8 @@ const Index = () => {
               }
             />
             <SkillCard
-              title="Procedural Generation"
-              description="Building algorithms for generating complex, organic structures and environments dynamically."
+              title="Génération Procédurale"
+              description="Construction d'algorithmes pour générer dynamiquement des structures et environnements complexes et organiques."
               icon={
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
@@ -142,8 +142,8 @@ const Index = () => {
               }
             />
             <SkillCard
-              title="Shader Programming"
-              description="Writing custom GLSL shaders for creating stunning visual effects and optimized rendering."
+              title="Programmation de Shaders"
+              description="Écriture de shaders GLSL personnalisés pour créer des effets visuels impressionnants et un rendu optimisé."
               icon={
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M12 3v19"></path>
@@ -153,8 +153,8 @@ const Index = () => {
               }
             />
             <SkillCard
-              title="Real-time Physics"
-              description="Implementing physics simulations for realistic object interactions and natural movement."
+              title="Physique en Temps Réel"
+              description="Implémentation de simulations physiques pour des interactions d'objets réalistes et des mouvements naturels."
               icon={
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M9 13A5 5 0 1 1 19 13a5 5 0 0 1-10 0Z"></path>
@@ -177,35 +177,35 @@ const Index = () => {
         >
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-              Featured Projects
+              Projets Principaux
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Explore my recent work at the cutting edge of AI and 3D technologies, 
-              highlighting innovative solutions and creative applications.
+              Explorez mes travaux récents à la pointe des technologies d'IA et 3D, 
+              mettant en avant des solutions innovantes et des applications créatives.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <ProjectCard
               id="neural-environment"
-              title="Neural Environment Simulator"
-              description="An AI-powered 3D environment that adapts and evolves based on user interaction patterns."
+              title="Simulateur d'Environnement Neural"
+              description="Un environnement 3D piloté par l'IA qui s'adapte et évolue en fonction des interactions utilisateur."
               image="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=1974&auto=format&fit=crop"
               tech={["Three.js", "TensorFlow", "WebGL"]}
               className="animate-fade-in opacity-100 delay-100"
             />
             <ProjectCard
               id="immersive-data"
-              title="Immersive Data Visualization"
-              description="Converting complex datasets into intuitive, interactive 3D visualizations for enhanced comprehension."
+              title="Visualisation de Données Immersive"
+              description="Conversion de jeux de données complexes en visualisations 3D intuitives et interactives pour une meilleure compréhension."
               image="https://images.unsplash.com/photo-1633412802994-5c058f151b66?q=80&w=1740&auto=format&fit=crop"
               tech={["D3.js", "React Three Fiber", "Python"]}
               className="animate-fade-in opacity-100 delay-200"
             />
             <ProjectCard
               id="generative-art"
-              title="Generative Art Installation"
-              description="A real-time generative art system that creates unique visuals based on environmental inputs."
+              title="Installation d'Art Génératif"
+              description="Un système d'art génératif en temps réel qui crée des visuels uniques basés sur des entrées environnementales."
               image="https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?q=80&w=1935&auto=format&fit=crop"
               tech={["WebGL", "GLSL", "p5.js"]}
               className="animate-fade-in opacity-100 delay-300"
@@ -253,10 +253,10 @@ const Index = () => {
         >
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-              Get In Touch
+              Me Contacter
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Have a project idea or want to collaborate? Let's create something amazing together.
+              Vous avez une idée de projet ou souhaitez collaborer ? Créons ensemble quelque chose d'extraordinaire.
             </p>
           </div>
 
@@ -294,7 +294,7 @@ const Index = () => {
       {/* Footer */}
       <footer className="py-8 px-6 border-t border-white/10">
         <div className="max-w-6xl mx-auto text-center text-sm text-muted-foreground">
-          <p>© {new Date().getFullYear()} Portfolio | Built with React, Three.js & Tailwind CSS</p>
+          <p>© {new Date().getFullYear()} Portfolio | Construit avec React, Three.js & Tailwind CSS</p>
         </div>
       </footer>
     </div>
