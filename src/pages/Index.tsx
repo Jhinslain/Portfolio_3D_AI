@@ -64,11 +64,9 @@ const Index = () => {
         >
           <h1 className="text-4xl md:text-6xl font-display font-bold mb-4">
             Portfolio de <span className="text-glow text-primary">Ghislain LEVREAU</span> <br />
-            avec IA & Technologies 3D
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl">
-            Transformer les idées en réalités immersives et interactives 
-            à l'intersection de l'intelligence artificielle et du design 3D.
+          Transformer les idées en expériences immersives et interactives, à l’intersection de l’intelligence artificielle et des technologies 3D.
           </p>
           <div className="flex flex-wrap gap-4">
             <Button size="lg" className="bg-gradient-to-r from-primary to-accent text-white">
