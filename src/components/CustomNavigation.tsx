@@ -8,7 +8,10 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@/components/ui/collapsible';
+
 import { Brain, Network } from 'lucide-react';
+
+import logo from '../assets/images/Jhin.png';
 
 const CustomNavigation = () => {
   const isMobile = useIsMobile();
@@ -53,7 +56,7 @@ const CustomNavigation = () => {
     >
       <div className="max-w-6xl mx-auto flex items-center justify-between">
         <Link to="/" className="font-display text-xl font-semibold flex items-center gap-2">
-          <Brain className="h-6 w-6 text-primary" />
+          <img src={logo} alt="Logo" className="w-8 h-8" />
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
             Ghislain LEVREAU  
           </span>
