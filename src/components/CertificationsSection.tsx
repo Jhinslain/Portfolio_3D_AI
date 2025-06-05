@@ -26,7 +26,7 @@ const certifications: CertificationProps[] = [
       "Identification des cas d’usage de l’IA générative",
       "Découverte des services AWS dédiés à l’IA générative",
     ],
-    certificateImage: aws
+    certificateImage: "https://www.credly.com/badges/964b31d7-f05b-4524-92ff-a012ca331485"
   },
   {
     title: "Apprenez à programmer en C++",

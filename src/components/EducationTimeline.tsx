@@ -29,15 +29,25 @@ const educationData: EducationEvent[] = [
   {
     id: 2,
     year: '2025',
-    title: "Alternance ISCOD (Management de la Transformation digitale en IA) – Majoli.io",
-    institution: 'ISCOD, Majoli.io',
+    title: "Apprentissage développeur full stack chez Majoli.io",
+    institution: 'Majoli.io',
     location: 'Marseille',
     duration: '1 ans',
-    description: "Formation en alternance à l'ISCOD, réalisée en tant que développeur full stack chez Majoli.io",
+    description: "Apprentissage chez Majoli.io, réalisée en tant que développeur full stack, gestion de projet, marketing",
     type: 'internship'
   },
   {
     id: 3,
+    year: '2025',
+    title: "Mastère en Management de la Transformation digitale en IA",
+    institution: 'ISCOD',
+    location: 'Marseille',
+    duration: '1 ans',
+    description: "Formation à l'ISCOD en Management de la Transformation digitale en IA",
+    type: 'university'
+  },
+  {
+    id: 4,
     year: '2024',
     title: "Diplôme d'Ingénieur Informatique",
     institution: 'Polytech',
@@ -46,7 +56,7 @@ const educationData: EducationEvent[] = [
     type: 'graduation'
   },
   {
-    id: 4,
+    id: 5,
     year: '2024',
     title: "Woofing maraîchage",
     institution: 'Ferme de Pâques',
@@ -55,7 +65,7 @@ const educationData: EducationEvent[] = [
     type: 'work'
   },
   {
-    id: 5,
+    id: 6,
     year: '2024',
     title: "Stage de 5ème année chez JungleVR",
     institution: 'JungleVR',
@@ -65,7 +75,7 @@ const educationData: EducationEvent[] = [
     type: 'internship'
   },
   {
-    id: 6,
+    id: 7,
     year: '2024',
     title: "Spécialisation Réalité Virtuelle et Augmentée | 5ème année",
     institution: 'Polytech',
@@ -75,7 +85,7 @@ const educationData: EducationEvent[] = [
     type: 'university'
   },
   {
-    id: 7,
+    id: 8,
     year: '2023',
     title: "Animateur en accueil de loisirs",
     institution: "Communauté de communes des Gorges de l'Ardèche",
@@ -84,7 +94,7 @@ const educationData: EducationEvent[] = [
     type: 'work'
   },
   {
-    id: 8,
+    id: 9,
     year: '2023',
     title: "Stage de 4ème année chez TURCAN",
     institution: 'TURCAN',
@@ -93,7 +103,7 @@ const educationData: EducationEvent[] = [
     type: 'internship'
   },
   {
-    id: 9,
+    id: 10,
     year: '2022',
     title: "Cycle d'Ingénierie Informatique | 4ème année",
     institution: 'Polytech',
@@ -102,7 +112,7 @@ const educationData: EducationEvent[] = [
     type: 'university'
   } ,
   {
-    id: 10,
+    id: 11,
     year: '2021',
     title: "Stage de 3ème année chez COME IN VR",
     institution: 'COME IN VR',
@@ -111,7 +121,7 @@ const educationData: EducationEvent[] = [
     type: 'internship'
   },
   {
-    id: 11,
+    id: 12,
     year: '2021',
     title: "Début du Cycle d'Ingénieur Informatique | 3ème année",
     institution: 'Polytech',
@@ -120,7 +130,7 @@ const educationData: EducationEvent[] = [
     type: 'university'
   },
   {
-    id: 12,
+    id: 13,
     year: '2019',
     title: "Cycle Préparatoire PeiP",
     institution: 'Polytech',
@@ -130,7 +140,7 @@ const educationData: EducationEvent[] = [
     type: 'university'
   } ,
   {
-    id: 13,
+    id: 14,
     year: '2019',
     title: "Diplôme du Baccalauréat Scientifique",
     institution: 'Lycée Paul-Arène',
@@ -143,7 +153,7 @@ const educationData: EducationEvent[] = [
 const EducationTimeline = () => {
   const [activeEvent, setActiveEvent] = useState<number>(1);
   const [scrollPosition, setScrollPosition] = useState<number>(0);
-  const [activeFilter, setActiveFilter] = useState<WorkType | 'all'>('all');
+  const [activeFilter, setActiveFilter] = useState<WorkType | 'all'>('university');
   const timelineRef = useRef<HTMLDivElement>(null);
   const eventsRef = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -166,14 +176,18 @@ const EducationTimeline = () => {
         
         setScrollPosition(scrollPercentage);
         
-        // Update active event based on scroll position
-        const index = Math.min(
-          Math.floor(scrollPercentage * educationData.length),
-          educationData.length - 1
+        // Update active event based on scroll position, considering only filtered events
+        const filteredEvents = educationData.filter(event => 
+          activeFilter === 'all' || event.type === activeFilter
         );
         
-        if (index >= 0 && index < educationData.length) {
-          setActiveEvent(educationData[Math.max(0, index)].id);
+        const index = Math.min(
+          Math.floor(scrollPercentage * filteredEvents.length),
+          filteredEvents.length - 1
+        );
+        
+        if (index >= 0 && index < filteredEvents.length) {
+          setActiveEvent(filteredEvents[Math.max(0, index)].id);
         }
       }
     };
@@ -182,7 +196,7 @@ const EducationTimeline = () => {
     handleScroll(); // Initial call
     
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [activeFilter]); // Add activeFilter as a dependency
 
   const getIcon = (type: WorkType) => {
     switch (type) {
@@ -204,7 +218,7 @@ const EducationTimeline = () => {
   );
 
   return (
-    <ScrollArea className="relative h-full overflow-y-auto pr-4">
+    <div className="relative h-full">
       <div className="flex justify-center gap-1 sm:gap-2 mb-4 sm:mb-8 px-2">
         <button
           onClick={() => setActiveFilter('all')}
@@ -343,7 +357,7 @@ const EducationTimeline = () => {
           </div>
         ))}
       </div>
-    </ScrollArea>
+    </div>
   );
 };
 

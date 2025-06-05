@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Badge } from './ui/badge';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
 import { BookCheck, Calendar, GraduationCap, FileText } from 'lucide-react';
@@ -33,11 +33,22 @@ const CertificationCard = ({
   link, 
   learnings = [] 
 }: CertificationProps) => {
+  const [isLearningsVisible, setIsLearningsVisible] = useState(false);
+
   return (
-    <Card className={cn(
-      "h-full transition-all duration-500 hover:shadow-lg hovr:border-primary/20 overflow-hidden group relative",
-      className
-    )} style={style}>
+    <Card 
+      className={cn(
+        "h-full transition-all duration-500 hover:shadow-lg hovr:border-primary/20 overflow-hidden group relative",
+        className
+      )} 
+      style={style}
+      onClick={() => {
+        // Toggle learnings visibility on mobile
+        if (window.innerWidth < 768) {
+          setIsLearningsVisible(!isLearningsVisible);
+        }
+      }}
+    >
       {/* Thumbnail with tags overlay */}
       {thumbnail && (
         <div className="relative h-32 w-full overflow-hidden">
@@ -63,7 +74,11 @@ const CertificationCard = ({
       )}
 
       {/* Default View */}
-      <div className="group-hover:opacity-0 transition-opacity duration-300 pb-16">
+      <div className={cn(
+        "transition-opacity duration-300 pb-16",
+        isLearningsVisible ? "opacity-0" : "opacity-100",
+        "md:group-hover:opacity-0"
+      )}>
         <CardHeader className="py-3">
           <CardTitle className="line-clamp-2 text-base">{title}</CardTitle>
           <CardDescription className="flex items-center gap-1 text-sm">
@@ -82,9 +97,13 @@ const CertificationCard = ({
         </CardContent>
       </div>
 
-      {/* Hover View */}
+      {/* Hover View / Mobile Click View */}
       {learnings.length > 0 && (
-        <div className="absolute inset-0 bg-background opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-6 flex flex-col pb-16">
+        <div className={cn(
+          "absolute inset-0 bg-background transition-opacity duration-300 p-6 flex flex-col pb-16",
+          isLearningsVisible ? "opacity-100" : "opacity-0",
+          "md:opacity-0 md:group-hover:opacity-100"
+        )}>
           <div className="flex items-center gap-2 text-primary mb-4">
             <GraduationCap className="h-5 w-5" />
             <h4 className="font-semibold">Ce que j'ai appris :</h4>
@@ -108,6 +127,7 @@ const CertificationCard = ({
             target="_blank" 
             rel="noopener noreferrer" 
             className="flex-1"
+            onClick={(e) => e.stopPropagation()} // Prevent card click when clicking link
           >
             <Button variant="outline" size="sm" className="w-full">
               Voir la formation
@@ -115,21 +135,41 @@ const CertificationCard = ({
           </a>
         )}
         {certificateImage && (
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button variant="outline" size="sm" className="flex-1">
+          certificateImage.startsWith('http') ? (
+            <a 
+              href={certificateImage} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="flex-1"
+              onClick={(e) => e.stopPropagation()} // Prevent card click when clicking link
+            >
+              <Button variant="outline" size="sm" className="w-full">
                 <FileText className="h-4 w-4 mr-2" />
                 Certificat
               </Button>
-            </DialogTrigger>
-            <DialogContent className="max-w-4xl">
-              <img
-                src={certificateImage}
-                alt={`Certificat ${title} par ${issuer}`}
-                className="w-full h-auto rounded-lg"
-              />
-            </DialogContent>
-          </Dialog>
+            </a>
+          ) : (
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="flex-1"
+                  onClick={(e) => e.stopPropagation()} // Prevent card click when clicking button
+                >
+                  <FileText className="h-4 w-4 mr-2" />
+                  Certificat
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-4xl">
+                <img
+                  src={certificateImage}
+                  alt={`Certificat ${title} par ${issuer}`}
+                  className="w-full h-auto rounded-lg"
+                />
+              </DialogContent>
+            </Dialog>
+          )
         )}
       </div>
     </Card>
