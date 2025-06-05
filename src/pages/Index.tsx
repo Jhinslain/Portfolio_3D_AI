@@ -3,7 +3,7 @@ import CustomNavigation from '@/components/CustomNavigation';
 import ParticleScene from '@/components/ParticleScene';
 import HeroObject3D from '@/components/HeroObject3D';
 import ProjectCard from '@/components/ProjectCard';
-import SkillCard from '@/components/SkillCard';
+import SkillSection from '@/components/SkillSection';
 import ContactForm from '@/components/ContactForm';
 import CertificationsSection from '@/components/CertificationsSection';
 import EducationTimeline from '@/components/EducationTimeline';
@@ -62,13 +62,44 @@ const Index = () => {
           ref={sectionRefs.intro}
           className="max-w-4xl mx-auto opacity-0"
         >
-          <h1 className="text-4xl md:text-6xl font-display font-bold mb-4">
+          <h1 className="text-4xl md:text-6xl font-display font-bold mb-16 text-center">
             Portfolio de <span className="text-glow text-primary">Ghislain LEVREAU</span> <br />
           </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl">
-          Transformer les idées en expériences immersives et interactives, à l’intersection de l’intelligence artificielle et des technologies 3D.
-          </p>
-          <div className="flex flex-wrap gap-4">
+          <div className="relative mb-16">
+            <svg
+              className="absolute -left-4 md:-left-8 -top-4 md:-top-8 w-8 h-8 md:w-12 md:h-12 text-primary/30"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z" />
+              <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z" />
+            </svg>
+            <div className="text-right px-4 md:px-8">
+              <p className="text-xl md:text-2xl text-muted-foreground italic">
+                The problem isn't how to make the world more technological. It's about how to make the world more humane again.
+              </p>
+              <p className="text-lg text-muted-foreground/80 mt-2">
+                ― John Maeda
+              </p>
+            </div>
+            <svg
+              className="absolute -right-4 md:-right-8 -bottom-4 md:-bottom-8 w-8 h-8 md:w-12 md:h-12 text-primary/30 rotate-180"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z" />
+              <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z" />
+            </svg>
+          </div>
+          <div className="flex flex-wrap gap-4 mt-8">
             <Button size="lg" className="bg-gradient-to-r from-primary to-accent text-white">
               Voir mes Projets
             </Button>
@@ -80,92 +111,7 @@ const Index = () => {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="py-20 px-6 bg-gradient-to-b from-transparent to-background/80">
-        <div 
-          ref={sectionRefs.skills}
-          className="max-w-6xl mx-auto opacity-0"
-        >
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-              Compétences Techniques
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Une combinaison de compétences techniques, de pensée créative et de résolution de problèmes 
-              qui stimulent les expériences numériques innovantes.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <SkillCard
-              title="Développement 3D"
-              description="Expert en création d'expériences 3D immersives utilisant Three.js, WebGL et d'autres technologies de rendu."
-              icon={
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 3c.5 0 1 .2 1.4.6l7 7c.8.8.8 2 0 2.8l-7 7c-.8.8-2 .8-2.8 0l-7-7c-.8-.8-.8-2 0-2.8l7-7c.4-.4.9-.6 1.4-.6z"></path>
-                  <path d="M17.5 7.5 12 13"></path>
-                  <path d="m5 15 5-5"></path>
-                  <path d="m5 9 5 5"></path>
-                </svg>
-              }
-            />
-            <SkillCard
-              title="IA & Machine Learning"
-              description="Développement de systèmes intelligents utilisant TensorFlow, PyTorch et implémentation d'algorithmes de vision par ordinateur."
-              icon={
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect width="18" height="18" x="3" y="3" rx="2"></rect>
-                  <path d="M7 7v10"></path>
-                  <path d="M11 7v10"></path>
-                  <path d="m15 7 2 10"></path>
-                </svg>
-              }
-            />
-            <SkillCard
-              title="Design Interactif"
-              description="Création d'interfaces intuitives et réactives qui brouillent la frontière entre expériences numériques et physiques."
-              icon={
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M7 6l9 4-9 4V6z"></path>
-                  <circle cx="12" cy="12" r="10"></circle>
-                </svg>
-              }
-            />
-            <SkillCard
-              title="Génération Procédurale"
-              description="Construction d'algorithmes pour générer dynamiquement des structures et environnements complexes et organiques."
-              icon={
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
-                </svg>
-              }
-            />
-            <SkillCard
-              title="Programmation de Shaders"
-              description="Écriture de shaders GLSL personnalisés pour créer des effets visuels impressionnants et un rendu optimisé."
-              icon={
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 3v19"></path>
-                  <path d="M5 3c-.5 0-1 .2-1.4.6L3 4.2C2 5.3 2 7 3 8l8 8c.8.8.8 2.3 0 3l-1 1c-.7.7-1.8.7-2.5 0L2 14.5"></path>
-                  <path d="M21 3c.5 0 1 .2 1.4.6L23 4.2c1 1 1 2.8 0 3.8l-8 8c-.8.8-.8 2.3 0 3l1 1c.7.7 1.8.7 2.5 0l5.5-5.5"></path>
-                </svg>
-              }
-            />
-            <SkillCard
-              title="Physique en Temps Réel"
-              description="Implémentation de simulations physiques pour des interactions d'objets réalistes et des mouvements naturels."
-              icon={
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M9 13A5 5 0 1 1 19 13a5 5 0 0 1-10 0Z"></path>
-                  <path d="M3 11.5a3.5 3.5 0 1 0 7 0 3.5 3.5 0 1 0-7 0Z"></path>
-                  <path d="M18 6.05A3.5 3.5 0 1 0 18 13"></path>
-                  <path d="M9 19a3.5 3.5 0 1 0-3.5-3.5"></path>
-                </svg>
-              }
-            />
-          </div>
-        </div>
-      </section>
-
+      <SkillSection />
 
       {/* Projects Section */}
       <section id="projects" className="py-20 px-6">
