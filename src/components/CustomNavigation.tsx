@@ -51,7 +51,7 @@ const CustomNavigation = () => {
           audioRef.current.currentTime = 0;
           audioRef.current.play();
         }
-        setTimeout(() => setShowScreamer(false), 1000);
+        setTimeout(() => setShowScreamer(false), 1250);
         return 0;
       }
       return newCount;
@@ -150,7 +150,7 @@ const CustomNavigation = () => {
           <img 
             src={gragasGif} 
             alt="Screamer" 
-            className="w-96 h-96 object-contain"
+            className="w-[800px] h-[800px] object-contain"
           />
         </div>
       )}

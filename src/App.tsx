@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -11,6 +10,7 @@ import AIDemo from "./pages/AIDemo";
 import ProjectDetail from "./pages/ProjectDetail";
 import NotFound from "./pages/NotFound";
 import MindMap3D from "./pages/MindMap3D";
+import MouseHalo from "./components/MouseHalo";
 
 // Scroll to hash component
 const ScrollToHash = () => {
@@ -42,6 +42,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <MouseHalo />
       <BrowserRouter>
         <ScrollToHash />
         <Routes>

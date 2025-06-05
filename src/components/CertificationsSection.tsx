@@ -6,91 +6,177 @@ import { Button } from './ui/button';
 import { BookOpen, Search } from 'lucide-react';
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from './ui/pagination';
 
-import openClassrooms from '../assets/images/OpenClassrooms.png';
-import udemy from '../assets/images/Udemy.png';
+import openClassrooms from '../assets/images/OpenClassRoomName.png';
+import udemy from '../assets/images/UdemyLogo.png';
+import aws from '../assets/images/AWSEducate.png';
 
 
 // Sample certifications data - this would typically come from an API or CMS
 const certifications: CertificationProps[] = [
   {
+    title: "Machine Learning Foundations",
+    issuer:"AWS",
+    date: "2025",
+    skills: ["Machine Learning", "AI", "AWS"],
+    thumbnail: aws,
+    link: "https://awseducate.instructure.com/courses/1108",
+    learnings: [
+      "Définition de l'intelligence artificielle générative",
+      "Présentation des modèles fondamentaux (foundation models)",
+      "Identification des cas d’usage de l’IA générative",
+      "Découverte des services AWS dédiés à l’IA générative",
+    ],
+    certificateImage: aws
+  },
+  {
     title: "Apprenez à programmer en C++",
     issuer: "OpenClassrooms",
-    date: "2025",
+    date: "2024",
     skills: ["C++"],
-    image: openClassrooms,
-    link: "https://openclassrooms.com/fr/courses/1894236-apprenez-a-programmer-en-c"
+    thumbnail: openClassrooms,
+    link: "https://openclassrooms.com/fr/courses/1894236-apprenez-a-programmer-en-c",
+    learnings: [
+      "Fondamentaux de la programmation en C++",
+      "Manipulation des variables et des types de données",
+      "Structures de contrôle et boucles",
+      "Fonctions et portée des variables",
+      "Manipulation des tableaux et des chaînes de caractères"
+    ]
   },
   {
     title: "Programmez en orienté objet avec C++",
     issuer: "OpenClassrooms",
-    date: "2025",
+    date: "2024",
     skills: ["C++"],
-    image: openClassrooms,
-    link: "https://openclassrooms.com/fr/courses/7137751-programmez-en-oriente-objet-avec-c"
+    thumbnail: openClassrooms,
+    link: "https://openclassrooms.com/fr/courses/7137751-programmez-en-oriente-objet-avec-c",
+    learnings: [
+      "Concepts de la programmation orientée objet",
+      "Classes et objets en C++",
+      "Héritage et polymorphisme",
+      "Encapsulation et abstraction",
+      "Gestion des exceptions"
+    ]
   },
   {
     title: "Réalisez la maquette d'une application mobile avec Adobe XD",
     issuer: "OpenClassrooms",
-    date: "2025",
+    date: "2023",
     skills: ["Design"],
-    image: openClassrooms,
-    link: "https://openclassrooms.com/fr/courses/3014016-realisez-la-maquette-d-une-application-mobile-avec-adobe-xd"
+    thumbnail: openClassrooms,
+    link: "https://openclassrooms.com/fr/courses/3014016-realisez-la-maquette-d-une-application-mobile-avec-adobe-xd",
+    learnings: [
+      "Principes du design d'interface mobile",
+      "Utilisation d'Adobe XD",
+      "Création de wireframes et prototypes",
+      "Design responsive",
+      "Tests utilisateurs et itérations"
+    ]
   },
   {
     title: "UNREAL ENGINE 5 : Guide complet développeur de jeux",
     issuer: "Udemy",
-    date: "2025",
+    date: "2024",
     skills: ["UE5", "Design"],
-    image: udemy,
-    link: "https://www.udemy.com/course/developpeur-unreal-engine-5-blueprint-guide-complet-creer-des-jeux/learn/lecture/28499158?start=0#overview"
+    thumbnail: udemy,
+    link: "https://www.udemy.com/course/developpeur-unreal-engine-5-blueprint-guide-complet-creer-des-jeux/learn/lecture/28499158?start=0#overview",
+    learnings: [
+      "Interface et outils d'Unreal Engine 5",
+      "Blueprints et programmation visuelle",
+      "Création d'environnements 3D",
+      "Systèmes de particules et effets visuels",
+      "Optimisation des performances"
+    ]
   },
   {
     title: "Débutez avec Angular",
     issuer: "OpenClassrooms",
-    date: "2025",
+    date: "2023",
     skills: ["Web"],
-    image: openClassrooms,
-    link: "https://openclassrooms.com/fr/courses/7471261-debutez-avec-angular"
+    thumbnail: openClassrooms,
+    link: "https://openclassrooms.com/fr/courses/7471261-debutez-avec-angular",
+    learnings: [
+      "Architecture d'une application Angular",
+      "Composants et templates",
+      "Directives et pipes",
+      "Services et injection de dépendances",
+      "Routing et navigation"
+    ]
   },
   {
     title: "Complétez vos connaissances sur Angular",
     issuer: "OpenClassrooms",
-    date: "2025",
+    date: "2023",
     skills: ["Web"],
-    image: openClassrooms,
-    link: "https://openclassrooms.com/fr/courses/7471271-completez-vos-connaissances-sur-angular"
+    thumbnail: openClassrooms,
+    link: "https://openclassrooms.com/fr/courses/7471271-completez-vos-connaissances-sur-angular",
+    learnings: [
+      "Formulaires réactifs",
+      "Gestion d'état avec RxJS",
+      "Tests unitaires et e2e",
+      "Optimisation des performances",
+      "Déploiement d'applications Angular"
+    ]
   },
   {
     title: "Passez au Full Stack avec Node.js, Express et MongoDB",
     issuer: "OpenClassrooms",
-    date: "2025",
+    date: "2023",
     skills: ["Web", "Data"],
-    image: openClassrooms,
-    link: "https://openclassrooms.com/fr/courses/6390246-passez-au-full-stack-avec-node-js-express-et-mongodb"
+    thumbnail: openClassrooms,
+    link: "https://openclassrooms.com/fr/courses/6390246-passez-au-full-stack-avec-node-js-express-et-mongodb",
+    learnings: [
+      "Développement backend avec Node.js",
+      "API REST avec Express",
+      "Base de données MongoDB",
+      "Authentification et sécurité",
+      "Déploiement d'applications full stack"
+    ]
   },
   {
     title: "Concevez votre site web avec PHP et MySQL",
     issuer: "OpenClassrooms",
-    date: "2025",
+    date: "2023",
     skills: ["Web", "Data"],
-    image: openClassrooms,
-    link: "https://openclassrooms.com/fr/courses/918836-concevez-votre-site-web-avec-php-et-mysql"
+    thumbnail: openClassrooms,
+    link: "https://openclassrooms.com/fr/courses/918836-concevez-votre-site-web-avec-php-et-mysql",
+    learnings: [
+      "Programmation PHP",
+      "Base de données MySQL",
+      "Architecture MVC",
+      "Sécurité des applications web",
+      "Gestion des sessions et cookies"
+    ]
   },
   {
     title: "Requêtez une base de données avec SQL",
     issuer: "OpenClassrooms",
     date: "2025",
     skills: ["Data"],
-    image: openClassrooms,
-    link: "https://openclassrooms.com/fr/courses/7818671-requetez-une-base-de-donnees-avec-sql"
+    thumbnail: openClassrooms,
+    link: "https://openclassrooms.com/fr/courses/7818671-requetez-une-base-de-donnees-avec-sql",
+    learnings: [
+      "Syntaxe SQL fondamentale",
+      "Requêtes SELECT complexes",
+      "Jointures et sous-requêtes",
+      "Optimisation des requêtes",
+      "Gestion des transactions"
+    ]
   },
   {
     title: "Réalisez un dashboard avec Tableau",
     issuer: "OpenClassrooms",
     date: "2025",
     skills: ["Data", "Design"],
-    image: openClassrooms,
-    link: "https://openclassrooms.com/fr/courses/8200086-realisez-un-dashboard-avec-tableau"
+    thumbnail: openClassrooms,
+    link: "https://openclassrooms.com/fr/courses/8200086-realisez-un-dashboard-avec-tableau",
+    learnings: [
+      "Interface et fonctionnalités de Tableau",
+      "Création de visualisations",
+      "Calculs et agrégations",
+      "Filtres et paramètres",
+      "Storytelling avec les données"
+    ]
   }
 ];
 
@@ -112,20 +198,25 @@ const CertificationsSection = () => {
   
   // Filter certifications based on search query and selected skills
   const filteredCertifications = useMemo(() => {
-    return certifications.filter(cert => {
-      // Filter by search query
-      const matchesQuery = 
-        searchQuery === '' || 
-        cert.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        cert.issuer.toLowerCase().includes(searchQuery.toLowerCase());
-      
-      // Filter by selected skills
-      const matchesSkills = 
-        selectedSkills.length === 0 || 
-        selectedSkills.some(skill => cert.skills.includes(skill));
-      
-      return matchesQuery && matchesSkills;
-    });
+    return certifications
+      .filter(cert => {
+        // Filter by search query
+        const matchesQuery = 
+          searchQuery === '' || 
+          cert.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          cert.issuer.toLowerCase().includes(searchQuery.toLowerCase());
+        
+        // Filter by selected skills
+        const matchesSkills = 
+          selectedSkills.length === 0 || 
+          selectedSkills.some(skill => cert.skills.includes(skill));
+        
+        return matchesQuery && matchesSkills;
+      })
+      .sort((a, b) => {
+        // Trier par date décroissante (du plus récent au plus ancien)
+        return parseInt(b.date) - parseInt(a.date);
+      });
   }, [searchQuery, selectedSkills]);
 
   // Calculate pagination
