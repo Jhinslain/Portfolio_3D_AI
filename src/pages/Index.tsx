@@ -7,6 +7,7 @@ import SkillSection from '@/components/SkillSection';
 import ContactForm from '@/components/ContactForm';
 import CertificationsSection from '@/components/CertificationsSection';
 import EducationTimeline from '@/components/EducationTimeline';
+import SideNavigation from '@/components/SideNavigation';
 import { Button } from '@/components/ui/button';
 
 const Index = () => {
@@ -54,6 +55,7 @@ const Index = () => {
     <div className="min-h-screen relative">
       <ParticleScene />
       <CustomNavigation />
+      <SideNavigation />
 
       {/* Hero Section */}
       <section id="home" className="min-h-screen flex items-center px-6 py-20 relative">
