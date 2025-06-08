@@ -19,12 +19,12 @@ const Object3D = () => {
     // Suivre le mouvement de la souris avec un effet d'amortissement
     meshRef.current.rotation.x = THREE.MathUtils.lerp(
       meshRef.current.rotation.x,
-      mouse.y * 0.5,
+      mouse.y * 1,
       0.1
     );
     meshRef.current.rotation.y = THREE.MathUtils.lerp(
       meshRef.current.rotation.y,
-      mouse.x * 0.5,
+      mouse.x * 1,
       0.1
     );
     
