@@ -1,0 +1,91 @@
+{
+    "nom": "Ghislain LEVREAU",
+    "date_de_naissance": "6 novembre 2001",
+    "localisation": "Marseille",
+    "formation": [
+      {
+        "diplôme": "Mastère Management de la transformation digitale en IA",
+        "établissement": "ISCOD",
+        "année": "2025",
+        "type": "alternance",
+        "entreprise": "Majoli.io"
+      },
+      {
+        "diplôme": "Diplôme d'ingénieur informatique",
+        "spécialisation": "Réalité Virtuelle et Augmentée",
+        "établissement": "Polytech Marseille",
+        "année": "2024"
+      },
+      {
+        "diplôme": "Cycle préparatoire PeiP",
+        "établissement": "Polytech Marseille",
+        "année": "2019-2021"
+      },
+      {
+        "diplôme": "Baccalauréat Scientifique",
+        "établissement": "Lycée Paul-Arène, Sisteron",
+        "année": "2019"
+      }
+    ],
+    "projets": [
+      "Simulation VR en milieu nucléaire (Unity)",
+      "Jeu expérimental sur Unreal Engine 5 (VR, 4 épreuves interactives)",
+      "Jeu de plateforme 3D avec personnages animés (Unreal Engine 5)",
+      "Jeu de la vie (Python, JavaScript, Unity - 3 versions)",
+      "Jeux mobiles 3D : jeu de ski Endless Run, Suika Game 3D"
+    ],
+    "expérience_pro": [
+      {
+        "poste": "Développeur Unity mobile",
+        "structure": "JungleVR",
+        "durée": "6 mois",
+        "année": 2024,
+        "lieu": "Remote"
+      },
+      {
+        "poste": "Développeur Full Stack",
+        "structure": "TURCAN",
+        "durée": "2 mois",
+        "année": 2023,
+        "lieu": "Mison"
+      },
+      {
+        "poste": "Développeur 3D Unity",
+        "structure": "COME IN VR",
+        "durée": "1 mois",
+        "année": 2022,
+        "lieu": "Martigues"
+      },
+      {
+        "poste": "Animateur en accueil de loisirs",
+        "structure": "Communauté de communes des Gorges de l'Ardèche",
+        "année": 2023,
+        "durée": "1 mois",
+        "lieu": "Vallon-Pont-d'Arc"
+      },
+      {
+        "poste": "Woofing maraîchage",
+        "structure": "Ferme de Pâques",
+        "année": 2024,
+        "durée": "1 mois",
+        "lieu": "Belgique"
+      }
+    ],
+    "compétences": {
+      "développement_3D_VR": ["Unity", "C#", "Unreal Engine 5", "C++", "OpenXR", "Blender", "Mixamo"],
+      "web": ["HTML", "CSS", "JavaScript", "PHP", "Angular", "Ionic", "WordPress"],
+      "data_ia": ["SQL", "MySQL", "SQLite", "Oracle", "Python", "TensorFlow", "PyTorch", "Power BI", "Tableau"],
+      "outils": ["Microsoft 365"]
+    },
+    "langues": {
+      "français": "natif",
+      "anglais": "B2 (TOEIC)",
+      "allemand": "A2"
+    },
+    "liens": {
+      "portfolio": "https://levreaughislain.com/",
+      "linkedin": "https://linkedin.com/in/levreaug"
+    },
+    "centres_intérêt": ["Jeux vidéo", "Cuisine", "Jardinage", "Plongée sous-marine"]
+  }
+  

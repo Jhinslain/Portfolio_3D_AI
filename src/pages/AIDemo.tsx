@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import CustomNavigation from '@/components/CustomNavigation';
 import { Button } from '@/components/ui/button';
@@ -11,7 +10,7 @@ const AIDemo = () => {
   const [messages, setMessages] = useState<{ role: 'user' | 'assistant', content: string }[]>([
     { 
       role: 'assistant', 
-      content: 'Bonjour ! Je suis une IA de démonstration. Comment puis-je vous aider aujourd\'hui?' 
+      content: 'Bonjour ! Je suis votre assistant personnel. Comment puis-je vous aider aujourd\'hui?' 
     }
   ]);
   const [isLoading, setIsLoading] = useState(false);
@@ -27,28 +26,25 @@ const AIDemo = () => {
     setIsLoading(true);
 
     try {
-      // Simulate AI response (in a real implementation, this would be an API call)
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Generate a simple response based on the input
-      let response = "Je suis une IA de démonstration, donc je ne peux pas vraiment analyser votre message. Dans une implémentation réelle, vous connecteriez cette interface à OpenAI, Anthropic, Gemini ou une autre API d'IA.";
-      
-      // Add some variety to the demo
-      if (input.toLowerCase().includes('bonjour') || input.toLowerCase().includes('salut')) {
-        response = "Bonjour ! Comment puis-je vous aider aujourd'hui ?";
-      } else if (input.toLowerCase().includes('merci')) {
-        response = "De rien ! C'est un plaisir de vous aider.";
-      } else if (input.toLowerCase().includes('3d')) {
-        response = "Notre site présente plusieurs démonstrations de technologies 3D. Vous pouvez voir des exemples sur la page d'accueil et dans la section Unity Game.";
-      } else if (input.toLowerCase().includes('unity')) {
-        response = "Notre démonstration Unity WebGL vous permet d'expérimenter des jeux directement dans votre navigateur, sans installation supplémentaire.";
+      const response = await fetch('/api/ask', {
+        method: 'POST',
+        body: JSON.stringify({ question: input }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Erreur lors de la communication avec l\'API');
       }
 
+      const data = await response.json();
+      
       // Add AI response
-      setMessages(prev => [...prev, { role: 'assistant', content: response }]);
+      setMessages(prev => [...prev, { role: 'assistant', content: data.reply }]);
     } catch (error) {
       console.error("Erreur lors de la génération de la réponse:", error);
-      toast.error("Impossible de générer une réponse.");
+      toast.error("Impossible de générer une réponse. Veuillez réessayer.");
     } finally {
       setIsLoading(false);
     }

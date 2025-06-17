@@ -6,6 +6,8 @@ import dbIcon from '@/assets/images/skills/Data2.png';
 import webIcon from '@/assets/images/skills/FullStack2.png';
 import designIcon from '@/assets/images/skills/Design.png';
 import toolsIcon from '@/assets/images/skills/Outils.png';
+import marketingIcon from '@/assets/images/skills/Marketing.png';
+import projetIcon from '@/assets/images/skills/Projet.png';
 
 const skills = [
   {
@@ -28,11 +30,24 @@ const skills = [
     description: "→ Visualisation & reporting : Power BI, Tableau\n\n→ Bases de données : SQL, SQLite, Oracle, MySQL, MongoDB",
     icon: <img src={dbIcon} alt="Data" className="w-20 h-20 object-contain" />
   },
-
   {
     title: "Design, Vidéo & UI/UX",
     description: "→ Suite Adobe : Illustrator, After Effects, Premiere Pro, Substance, Adobe XD\n\n→ Prototypage & graphisme : Figma, Canva Pro\n\n→ Identité visuelle : Création de logos, charte graphique, animations",
     icon: <img src={designIcon} alt="Design" className="w-20 h-20 object-contain" />
+  },
+  {
+    title: "Marketing & Communication",
+    description: 
+      "→ Prospection & emailing : SmartLead, Apollo, Cold Emailing, MillionVerifier\n\n" +
+      "→ Automatisation & interaction client : Twilio, Hubspot, Ringover, Stripe",
+    icon: <img src={marketingIcon} alt="Marketing" className="w-20 h-20 object-contain" />
+  },
+  {
+    title: "Gestion de Projets",
+    description: "→ Pilotage projet : Coordination d'une équipe (2 devs, 1 designer) chez Majoli.io sur la création d'un CMS\n\n" +
+    "→ Gestion & organisation : Trello, Notion, Slack, Microsoft 365, Google Workspace\n\n" +
+    "→ Déploiement & versioning :GitHub, GitLab, AWS Amplify\n\n",
+    icon: <img src={projetIcon} alt="Projet" className="w-20 h-20 object-contain" />
   },
   {
     title: "Outils & Écosystème",
@@ -59,7 +74,7 @@ const SkillSection = ({ className = "" }: SkillSectionProps) => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 gap-y-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 gap-y-20">
           {skills.map((skill, index) => (
             <SkillCard
               key={index}
