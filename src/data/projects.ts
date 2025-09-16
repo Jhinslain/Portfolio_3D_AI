@@ -6,7 +6,7 @@ export interface ProjectImage {
 
 export interface ProjectLink {
   url: string;
-  type: 'github' | 'pdf' | 'website' | 'video';
+  type: 'github' | 'pdf' | 'website' | 'video' | 'ReadMe';
   label: string;
 }
 
@@ -15,22 +15,25 @@ export interface ProjectData {
   title: string;
   shortDescription: string;
   fullDescription: string;
-  mainImage: string;
-  images: ProjectImage[];
-  tech: string[];
+  mainImage?: string;
+  images?: ProjectImage[];
   video?: string;
-  links: ProjectLink[];
+  tech: string[];
+  links?: ProjectLink[];
   category: 'ai' | 'web' | 'mobile' | 'desktop' | 'game' | 'other';
-  status: 'completed' | 'in-progress' | 'planned';
+  status: 'completed' | 'in-progress' | 'not-finished';
   year: number;
   source: 'Polytech' | 'ISCOD' | 'Majoli.io' | 'JungleVR' |'Projet Personnel' ; 
 }
 
 // Données des projets
 export const projectsData: ProjectData[] = [
+  // ========================================
+  // PROJET 1: MON PORTFOLIO
+  // ========================================
   {
-    id: "portfolio-website",
-    title: "Site Portfolio Interactif",
+    id: "mon-portfolio",
+    title: "Mon Portfolio",
     shortDescription: "Un portfolio web moderne avec des animations 3D et des interactions immersives.",
     fullDescription: `
       Un site portfolio moderne construit avec React et Three.js, mettant en avant des animations 3D 
@@ -44,14 +47,18 @@ export const projectsData: ProjectData[] = [
     ],
     tech: ["React", "Three.js", "TypeScript", "Tailwind CSS", "Vite"],
     links: [
-      { url: "https://github.com", type: "github", label: "Voir le Code Source" },
-      { url: "https://example.com", type: "website", label: "Site Live" }
+      { url: "https://github.com/Jhinslain/portfolio", type: "github", label: "Voir le Code Source" },
+      { url: "https://levreaughislain.com/", type: "website", label: "Site Live" }
     ],
     category: 'web',
-    status: 'completed',
-    year: 2024,
+    status: 'in-progress',
+    year: 2025,
     source: 'Projet Personnel'
   },
+
+  // ========================================
+  // PROJET 2: ATELIER BORRELLI
+  // ========================================
   {
     id: "atelier-borrelli",
     title: "Atelier Borrelli - Site Web Professionnel",
@@ -74,24 +81,58 @@ export const projectsData: ProjectData[] = [
       des rendez-vous, de la newsletter, du chatbot et de l'upload de fichiers. L'interface d'administration 
       permet la gestion complète du contenu sans intervention technique.
     `,
-    mainImage: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop",
+    mainImage: "/projets/atelierborrelli/Borrelli0.png",
     images: [
-      { url: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop", alt: "Interface du site Atelier Borrelli" },
-      { url: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?q=80&w=2126&auto=format&fit=crop", alt: "Page de services architecturaux" },
-      { url: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=1970&auto=format&fit=crop", alt: "Système de rendez-vous en ligne" },
-      { url: "https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop", alt: "Galerie de réalisations" }
+      { url: "/projets/atelierborrelli/Borrelli0.png", alt: "Interface du site Atelier Borrelli" },
+      { url: "/projets/atelierborrelli/Borrelli1.png", alt: "Page de services architecturaux" },
+      { url: "/projets/atelierborrelli/Borrelli2.png", alt: "Système de rendez-vous en ligne" },
+      { url: "/projets/atelierborrelli/Borrelli3.png", alt: "Galerie de réalisations" },
+      { url: "/projets/atelierborrelli/Borrelli4.png", alt: "Page de blog" },
+      { url: "/projets/atelierborrelli/Borrelli5.png", alt: "Page de contact" },
+      { url: "/projets/atelierborrelli/Borrelli6.png", alt: "Page de réalisations" },
+      { url: "/projets/atelierborrelli/Borrelli7.png", alt: "Page de galerie" },
+      { url: "/projets/atelierborrelli/Borrelli8.png", alt: "Page de blog" },
     ],
-    tech: ["Next.js 14", "React 18", "TypeScript", "Tailwind CSS", "MongoDB", "AWS S3", "SendGrid", "Google Calendar API"],
-    video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    links: [
-      { url: "https://github.com", type: "github", label: "Voir le Code Source" },
-      { url: "https://atelierborrelli.com", type: "website", label: "Site Live" },
-      { url: "/documents/atelier-borrelli-doc.pdf", type: "pdf", label: "Documentation Technique" }
-    ],
+    tech: ["Next.js 14", "React 18", "TypeScript", "Tailwind CSS", "MongoDB", "AWS S3", "SendGrid", "Google Calendar API", "Crisp Chat"],
+      links: [
+        { url: "https://atelierborrelli.com", type: "website", label: "Site Live" },
+        { url: "/projets/atelierborrelli/ReadMeBorrelli.txt", type: "ReadMe", label: "Documentation Technique" }
+      ],
     category: 'web',
     status: 'completed',
     year: 2025,
     source: 'Majoli.io'
+  },
+
+  // ========================================
+  // PROJET 3: MÉMOIRE VIDÉO
+  // ========================================
+  {
+    id: "memoire-video",
+    title: "Mémoire Vidéo - Production Audiovisuelle",
+    shortDescription: "Vidéo de mémoire de 3 minutes avec montage, animations, effets audio et voix off.",
+    fullDescription: `
+      Production audiovisuelle complète d'un mémoire de 3 minutes réalisée avec Adobe Premiere Pro. 
+      Le projet démontre des compétences en montage vidéo et post-production.
+      
+      La vidéo intègre une vidéo de fond dynamique, des sous-titres synchronisés, des animations simples
+      et des effets de texte. (Un passage a été flouté pour préserver l'anonymat.)
+      Effets de masking et retouche vidéo.
+      
+      La bande sonore utilise des musiques d'Artlist ainsi que des effets audio intégrés. 
+      La voix off a été générée avec ElevenLabs. 
+      Les séquences géographiques ont été créées avec Google Earth Studio.
+      
+      Le projet se termine par un générique de fin complet avec crédits et remerciements.
+    `,
+    mainImage: "/projets/memoireVideo/memoireVideoCouverture.jpg",
+    video: "/projets/memoireVideo/MémoireVideo.mp4",
+    tech: ["Adobe Premiere Pro", "ElevenLabs", "Artlist", "Google Earth Studio", "Masking", "Post-Production", "Montage Vidéo"],
+    
+    category: 'other',
+    status: 'completed',
+    year: 2025,
+    source: 'Projet Personnel'
   }
 ];
 

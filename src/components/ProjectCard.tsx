@@ -22,7 +22,7 @@ const ProjectCard = ({
 
   const handleLiveClick = (e: React.MouseEvent) => {
     e.stopPropagation(); // Empêche le clic de la carte
-    const liveLink = project.links.find(link => link.type === 'website');
+    const liveLink = project.links?.find(link => link.type === 'website');
     if (liveLink) {
       window.open(liveLink.url, '_blank');
     }
@@ -42,13 +42,19 @@ const ProjectCard = ({
       onClick={handleCardClick}
     >
       <div className="relative h-56 overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center transition-transform duration-700"
-          style={{ 
-            backgroundImage: `url(${project.mainImage})`,
-            transform: isHovered ? 'scale(1.05)' : 'scale(1)'
-          }}
-        />
+        {project.mainImage ? (
+          <div 
+            className="absolute inset-0 bg-cover bg-center transition-transform duration-700"
+            style={{ 
+              backgroundImage: `url(${project.mainImage})`,
+              transform: isHovered ? 'scale(1.05)' : 'scale(1)'
+            }}
+          />
+        ) : (
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
+            <div className="text-4xl opacity-50">📁</div>
+          </div>
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
       </div>
       
@@ -58,15 +64,15 @@ const ProjectCard = ({
           <Badge 
             variant="outline" 
             className={cn(
-              "text-xs",
-              project.status === 'completed' && "bg-green-500/20 text-green-400 border-green-500/30",
-              project.status === 'in-progress' && "bg-yellow-500/20 text-yellow-400 border-yellow-500/30",
-              project.status === 'planned' && "bg-blue-500/20 text-blue-400 border-blue-500/30"
+              "text-xs rounded-md",
+              project.status === 'completed' && "bg-purple-500/20 text-purple-400 border-purple-500/30",
+              project.status === 'in-progress' && "bg-blue-500/20 text-blue-400 border-blue-500/30",
+              project.status === 'not-finished' && "bg-gray-500/20 text-gray-400 border-gray-500/30"
             )}
           >
             {project.status === 'completed' && 'Terminé'}
             {project.status === 'in-progress' && 'En cours'}
-            {project.status === 'planned' && 'Planifié'}
+            {project.status === 'not-finished' && 'Non fini'}
           </Badge>
         </div>
         
@@ -91,19 +97,21 @@ const ProjectCard = ({
           )}
         </div>
         
-        <Button 
-          variant="outline" 
-          size="sm" 
-          className="w-full"
-          onClick={handleLiveClick}
-        >
-          <span>Live</span>
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-2">
-            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-            <polyline points="15 3 21 3 21 9"></polyline>
-            <line x1="10" y1="14" x2="21" y2="3"></line>
-          </svg>
-        </Button>
+        {project.links?.some(link => link.type === 'website') && (
+          <Button 
+            variant="outline" 
+            size="sm" 
+            className="w-full"
+            onClick={handleLiveClick}
+          >
+            <span>Live</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-2">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+          </Button>
+        )}
       </div>
     </div>
   );

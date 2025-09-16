@@ -8,6 +8,7 @@ import ContactForm from '@/components/ContactForm';
 import CertificationsSection from '@/components/CertificationsSection';
 import EducationTimeline from '@/components/EducationTimeline';
 import SideNavigation from '@/components/SideNavigation';
+import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 
 const Index = () => {
@@ -112,13 +113,13 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Skills Section */}
-      <SkillSection />
-
       {/* Projects Section */}
       <div ref={sectionRefs.projects} className="opacity-0">
         <ProjectsSection />
       </div>
+
+      {/* Skills Section */}
+      <SkillSection />
 
       {/* Education Timeline Section */}
       <section id="education" className="py-20 px-6 bg-gradient-to-b from-background/60 to-background/90">
@@ -151,8 +152,8 @@ const Index = () => {
 
       
 
-      {/* Contact Section */}
-      <section id="contact" className="py-20 px-6">
+      {/* Contact Section - Hidden */}
+      <section id="contact" className="py-20 px-6 hidden">
         <div 
           ref={sectionRefs.contact}
           className="max-w-6xl mx-auto opacity-0"
@@ -198,11 +199,7 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-6 border-t border-white/10">
-        <div className="max-w-6xl mx-auto text-center text-sm text-muted-foreground">
-          <p>© {new Date().getFullYear()} Portfolio de Ghislain LEVREAU | Construit avec React, Three.js & Tailwind CSS</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

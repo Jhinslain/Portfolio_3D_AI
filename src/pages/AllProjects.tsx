@@ -33,7 +33,7 @@ const AllProjects = () => {
     { value: 'all', label: 'Tous les statuts' },
     { value: 'completed', label: 'Terminé' },
     { value: 'in-progress', label: 'En cours' },
-    { value: 'planned', label: 'Planifié' }
+    { value: 'not-finished', label: 'Non fini' }
   ];
 
   const sources = [
@@ -78,7 +78,7 @@ const AllProjects = () => {
         case 'title-desc':
           return b.title.localeCompare(a.title);
         case 'status':
-          const statusOrder = { 'completed': 0, 'in-progress': 1, 'planned': 2 };
+          const statusOrder = { 'completed': 0, 'in-progress': 1, 'not-started': 2 };
           return statusOrder[a.status] - statusOrder[b.status];
         default:
           return 0;
@@ -91,11 +91,11 @@ const AllProjects = () => {
   const getStatusColor = (status: ProjectData['status']) => {
     switch (status) {
       case 'completed':
-        return 'bg-green-500/20 text-green-400 border-green-500/30';
+        return 'bg-purple-500/20 text-purple-400 border-purple-500/30';
       case 'in-progress':
-        return 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30';
-      case 'planned':
         return 'bg-blue-500/20 text-blue-400 border-blue-500/30';
+      case 'not-finished':
+        return 'bg-gray-500/20 text-gray-400 border-gray-500/30';
       default:
         return 'bg-gray-500/20 text-gray-400 border-gray-500/30';
     }
@@ -107,8 +107,8 @@ const AllProjects = () => {
         return 'Terminé';
       case 'in-progress':
         return 'En cours';
-      case 'planned':
-        return 'Planifié';
+      case 'not-finished':
+        return 'Non fini';
       default:
         return status;
     }
@@ -119,7 +119,7 @@ const AllProjects = () => {
       <CustomNavigation />
       
       {/* Header */}
-      <div className="bg-gradient-to-b from-background/60 to-background/90 py-12 px-6">
+      <div className="bg-gradient-to-b from-background/60 to-background/90 py-12 px-6 pt-24">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center gap-4 mb-6">
             <Link to="/#projects">
@@ -294,22 +294,22 @@ const AllProjects = () => {
               <div className="text-sm text-muted-foreground">Projets Total</div>
             </div>
             <div>
-              <div className="text-2xl font-bold text-green-400 mb-2">
+              <div className="text-2xl font-bold text-purple-400 mb-2">
                 {allProjects.filter(p => p.status === 'completed').length}
               </div>
               <div className="text-sm text-muted-foreground">Terminés</div>
             </div>
             <div>
-              <div className="text-2xl font-bold text-yellow-400 mb-2">
+              <div className="text-2xl font-bold text-blue-400 mb-2">
                 {allProjects.filter(p => p.status === 'in-progress').length}
               </div>
               <div className="text-sm text-muted-foreground">En Cours</div>
             </div>
             <div>
-              <div className="text-2xl font-bold text-blue-400 mb-2">
-                {allProjects.filter(p => p.status === 'planned').length}
+              <div className="text-2xl font-bold text-gray-400 mb-2">
+                {allProjects.filter(p => p.status === 'not-finished').length}
               </div>
-              <div className="text-sm text-muted-foreground">Planifiés</div>
+              <div className="text-sm text-muted-foreground">Non finis</div>
             </div>
           </div>
         </div>
