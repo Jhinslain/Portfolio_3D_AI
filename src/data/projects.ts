@@ -47,7 +47,7 @@ export const projectsData: ProjectData[] = [
     ],
     tech: ["React", "Three.js", "TypeScript", "Tailwind CSS", "Vite"],
     links: [
-      { url: "https://github.com/Jhinslain/portfolio", type: "github", label: "Voir le Code Source" },
+      { url: "https://github.com/Jhinslain/Portfolio_3D_AI", type: "github", label: "Voir le Code Source" },
       { url: "https://levreaughislain.com/", type: "website", label: "Site Live" }
     ],
     category: 'web',
