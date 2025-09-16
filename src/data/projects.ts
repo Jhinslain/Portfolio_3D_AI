@@ -126,7 +126,7 @@ export const projectsData: ProjectData[] = [
       Le projet se termine par un générique de fin complet avec crédits et remerciements.
     `,
     mainImage: "/projets/memoireVideo/memoireVideoCouverture.jpg",
-    video: "/projets/memoireVideo/MémoireVideo.mp4",
+    video: "https://drive.google.com/file/d/1UHzLYBrSHwpyLOGvrnQnl_hhc1jkBoOH/preview",
     tech: ["Adobe Premiere Pro", "ElevenLabs", "Artlist", "Google Earth Studio", "Masking", "Post-Production", "Montage Vidéo"],
     
     category: 'other',
