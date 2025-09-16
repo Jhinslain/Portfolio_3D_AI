@@ -283,7 +283,7 @@ const EducationTimeline = () => {
           title="Travail"
         >
           <Briefcase className="w-4 h-4" />
-          <span className="hidden sm:inline">Travail</span>
+          <span className="hidden sm:inline">Emplois</span>
         </button>
       </div>
 

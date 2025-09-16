@@ -17,7 +17,7 @@ const skills = [
   },
   {
     title: "Intelligence Artificielle",
-    description: "→ Langage & frameworks IA : Python, PyTorch, TensorFlow\n\n→ Outils IA intégrés : ChatGPT, Gemini , Cursor, ElevenLabs",
+    description: "→ Langage & frameworks IA : Python, PyTorch, TensorFlow\n\n→ Outils IA intégrés : ChatGPT, Gemini, Cursor, ElevenLabs, Lovable",
     icon: <img src={aiIcon} alt="IA" className="w-20 h-20 object-contain" />
   },
   {
@@ -62,7 +62,7 @@ interface SkillSectionProps {
 
 const SkillSection = ({ className = "" }: SkillSectionProps) => {
   return (
-    <section id="skills" className={`py-20 px-6 bg-gradient-to-b from-transparent to-background/80 ${className}`}>
+    <section id="skills" className={`py-20 px-6 bg-gradient-to-b from-transparent to-background/60 ${className}`}>
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-20">
           <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">

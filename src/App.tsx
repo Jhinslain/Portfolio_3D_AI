@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import UnityGame from "./pages/UnityGame";
 import AIDemo from "./pages/AIDemo";
 import ProjectDetail from "./pages/ProjectDetail";
+import AllProjects from "./pages/AllProjects";
 import NotFound from "./pages/NotFound";
 import MindMap3D from "./pages/MindMap3D";
 import MouseHalo from "./components/MouseHalo";
@@ -50,6 +51,7 @@ const App = () => (
           <Route path="/unity-game" element={<UnityGame />} />
           <Route path="/ai-demo" element={<AIDemo />} />
           <Route path="/mind-map" element={<MindMap3D />} />
+          <Route path="/projects" element={<AllProjects />} />
           <Route path="/project/:id" element={<ProjectDetail />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

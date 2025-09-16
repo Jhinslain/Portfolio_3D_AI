@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react';
 import CustomNavigation from '@/components/CustomNavigation';
 import ParticleScene from '@/components/ParticleScene';
 import HeroObject3D from '@/components/HeroObject3D';
-import ProjectCard from '@/components/ProjectCard';
+import ProjectsSection from '@/components/ProjectsSection';
 import SkillSection from '@/components/SkillSection';
 import ContactForm from '@/components/ContactForm';
 import CertificationsSection from '@/components/CertificationsSection';
@@ -116,52 +116,12 @@ const Index = () => {
       <SkillSection />
 
       {/* Projects Section */}
-      <section id="projects" className="py-20 px-6">
-        <div 
-          ref={sectionRefs.projects}
-          className="max-w-6xl mx-auto opacity-0"
-        >
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-              Projets Principaux
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Explorez mes travaux récents à la pointe des technologies d'IA et 3D, 
-              mettant en avant des solutions innovantes et des applications créatives.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <ProjectCard
-              id="neural-environment"
-              title="Simulateur d'Environnement Neural"
-              description="Un environnement 3D piloté par l'IA qui s'adapte et évolue en fonction des interactions utilisateur."
-              image="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=1974&auto=format&fit=crop"
-              tech={["Three.js", "TensorFlow", "WebGL"]}
-              className="animate-fade-in opacity-100 delay-100"
-            />
-            <ProjectCard
-              id="immersive-data"
-              title="Visualisation de Données Immersive"
-              description="Conversion de jeux de données complexes en visualisations 3D intuitives et interactives pour une meilleure compréhension."
-              image="https://images.unsplash.com/photo-1633412802994-5c058f151b66?q=80&w=1740&auto=format&fit=crop"
-              tech={["D3.js", "React Three Fiber", "Python"]}
-              className="animate-fade-in opacity-100 delay-200"
-            />
-            <ProjectCard
-              id="generative-art"
-              title="Installation d'Art Génératif"
-              description="Un système d'art génératif en temps réel qui crée des visuels uniques basés sur des entrées environnementales."
-              image="https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?q=80&w=1935&auto=format&fit=crop"
-              tech={["WebGL", "GLSL", "p5.js"]}
-              className="animate-fade-in opacity-100 delay-300"
-            />
-          </div>
-        </div>
-      </section>
+      <div ref={sectionRefs.projects} className="opacity-0">
+        <ProjectsSection />
+      </div>
 
       {/* Education Timeline Section */}
-      <section id="education" className="py-20 px-6 bg-gradient-to-b from-background/30 to-background/60">
+      <section id="education" className="py-20 px-6 bg-gradient-to-b from-background/60 to-background/90">
         <div 
           ref={sectionRefs.education}
           className="max-w-6xl mx-auto opacity-0"
@@ -180,7 +140,7 @@ const Index = () => {
       </section>
 
       {/* Certifications Section */}
-      <section id="certifications" className="py-20 px-6 bg-gradient-to-b from-background/50 to-background">
+      <section id="certifications" className="py-20 px-6 bg-gradient-to-b from-background/80 to-background">
         <div 
           ref={sectionRefs.certifications}
           className="max-w-6xl mx-auto opacity-0"
