@@ -102,12 +102,12 @@ const Index = () => {
               <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z" />
             </svg>
           </div>
-          <div className="flex flex-wrap gap-4 mt-8 relative z-10">
+          <div className="flex flex-wrap justify-center gap-4 mt-8 relative z-10">
             <Button size="lg" className="bg-gradient-to-r from-primary to-accent text-white" asChild>
-              <a href="#projects">Voir mes Projets</a>
+              <a href="#projects">Voir mes projets</a>
             </Button>
             <Button size="lg" variant="outline" className="border-white/20 hover:bg-white/5" asChild>
-              <a href="#contact">Me Contacter</a>
+              <a href="#contact">Me contacter</a>
             </Button>
           </div>
         </div>

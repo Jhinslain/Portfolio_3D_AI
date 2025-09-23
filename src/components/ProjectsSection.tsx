@@ -38,7 +38,7 @@ const ProjectsSection = () => {
             asChild
           >
             <Link to="/projects">
-              <span>Tous les Projets</span>
+              <span>Tous les projets</span>
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </Button>

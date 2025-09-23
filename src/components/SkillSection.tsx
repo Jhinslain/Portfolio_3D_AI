@@ -66,7 +66,7 @@ const SkillSection = ({ className = "" }: SkillSectionProps) => {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-20">
           <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-            💼 Compétences
+            Compétences
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Une combinaison de compétences techniques, de pensée créative et de résolution de problèmes 

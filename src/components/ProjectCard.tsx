@@ -20,18 +20,11 @@ const ProjectCard = ({
     window.location.href = `/project/${project.id}`;
   };
 
-  const handleLiveClick = (e: React.MouseEvent) => {
-    e.stopPropagation(); // Empêche le clic de la carte
-    const liveLink = project.links?.find(link => link.type === 'website');
-    if (liveLink) {
-      window.open(liveLink.url, '_blank');
-    }
-  };
   
   return (
     <div 
       className={cn(
-        "glass-card rounded-lg overflow-hidden transition-all duration-500",
+        "glass-card rounded-lg overflow-hidden transition-all duration-500 relative",
         "transform hover:translate-y-[-8px] hover:shadow-xl",
         isHovered ? "scale-[1.02]" : "scale-100",
         "cursor-pointer",
@@ -57,6 +50,12 @@ const ProjectCard = ({
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
       </div>
+      
+      {/* Overlay sombre au hover */}
+      <div className={cn(
+        "absolute inset-0 bg-black/40 transition-opacity duration-300 pointer-events-none",
+        isHovered ? "opacity-100" : "opacity-0"
+      )} />
       
       <div className="p-6">
         <div className="flex items-start justify-between mb-2">
@@ -97,21 +96,14 @@ const ProjectCard = ({
           )}
         </div>
         
-        {project.links?.some(link => link.type === 'website') && (
-          <Button 
-            variant="outline" 
-            size="sm" 
-            className="w-full"
-            onClick={handleLiveClick}
-          >
-            <span>Live</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-2">
-              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-              <polyline points="15 3 21 3 21 9"></polyline>
-              <line x1="10" y1="14" x2="21" y2="3"></line>
-            </svg>
-          </Button>
-        )}
+        <div className={cn(
+          "absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-background to-transparent transition-all duration-300 text-center",
+          isHovered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
+        )}>
+          <p className="text-sm font-medium text-white drop-shadow-lg">
+            Cliquer pour voir plus de détails
+          </p>
+        </div>
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ArrowLeft, Github, FileText, Link as LinkIcon, Calendar, Tag, Play, X } from 'lucide-react';
+import { ArrowLeft, Github, FileText, Link as LinkIcon, Calendar, Tag, Play, X, Users, User, Users2, UserCheck } from 'lucide-react';
 import CustomNavigation from '@/components/CustomNavigation';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
@@ -132,16 +132,17 @@ const ProjectDetail = () => {
       .replace(/```([\s\S]*?)```/g, '<pre class="bg-muted p-4 rounded-lg overflow-x-auto my-4"><code>$1</code></pre>')
       .replace(/`([^`]+)`/g, '<code class="bg-muted px-2 py-1 rounded text-sm">$1</code>')
       
-      // Lists
+      // Lists - traiter les listes en premier pour éviter les <br> dans les listes
       .replace(/^\* (.*$)/gim, '<li class="ml-4 mb-1">• $1</li>')
       .replace(/^- (.*$)/gim, '<li class="ml-4 mb-1">• $1</li>')
       
       // Links
       .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">$1</a>')
       
-      // Line breaks
-      .replace(/\n\n/g, '</p><p class="mb-4">')
-      .replace(/\n/g, '<br>');
+      // Line breaks - traiter les lignes vides et doubles retours à la ligne comme des paragraphes
+      .replace(/\n\s*\n/g, '</p><p class="mb-4">')
+      // Supprimer tous les retours à la ligne simples (pour la lisibilité du code)
+      .replace(/\n/g, ' ');
   };
 
   // Function to render the correct icon based on link type
@@ -217,6 +218,16 @@ const ProjectDetail = () => {
                 {project.category === 'game' && 'Jeu'}
                 {project.category === 'other' && 'Autre'}
               </Badge>
+              {project.team && (
+                <Badge className="bg-white/20 text-white rounded-md hover:bg-white/20">
+                  {project.team === 'solo' && <User className="w-3 h-3 mr-1" />}
+                  {project.team === 'team' && <Users className="w-3 h-3 mr-1" />}
+                  {project.team === 'duo' && <Users2 className="w-3 h-3 mr-1" />}
+                  {project.team === 'solo' && 'Solo'}
+                  {project.team === 'team' && 'Équipe'}
+                  {project.team === 'duo' && 'Binôme'}
+                </Badge>
+              )}
               <Badge className="bg-white/20 text-white rounded-md hover:bg-white/20">
                 {project.source}
               </Badge>
@@ -233,9 +244,12 @@ const ProjectDetail = () => {
             <div>
               <h2 className="text-2xl font-semibold mb-4">Aperçu</h2>
               <div className="max-w-none">
-                <p className="mb-1 text-muted-foreground leading-relaxed" style={{ textIndent: '1rem' }}>
-                  {project.fullDescription.replace(/\n/g, ' ').trim()}
-                </p>
+                <div 
+                  className="text-muted-foreground leading-relaxed whitespace-pre-line"
+                  dangerouslySetInnerHTML={{ 
+                    __html: `<p class="mb-4">${parseMarkdown(project.fullDescription.trim())}</p>` 
+                  }}
+                />
               </div>
             </div>
             
